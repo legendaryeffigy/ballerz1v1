@@ -68,10 +68,7 @@
       max-width: 100px; white-space: nowrap;
       overflow: hidden; text-overflow: ellipsis;
     }
-    .music-vol {
-      width: 60px; accent-color: var(--orange);
-      cursor: pointer;
-    }
+    .music-vol { width: 60px; accent-color: var(--orange); cursor: pointer; }
 
     /* ── Buttons ── */
     .btn {
@@ -79,11 +76,11 @@
       padding: 12px 28px; border-radius: 10px; border: none; cursor: pointer;
       font-size: .95rem; font-weight: 700; transition: all .15s; gap: 7px;
     }
-    .btn-primary  { background: var(--orange); color: #000; }
-    .btn-primary:hover { background: #ff8c00; transform: translateY(-1px); }
+    .btn-primary   { background: var(--orange); color: #000; }
+    .btn-primary:hover  { background: #ff8c00; transform: translateY(-1px); }
     .btn-secondary { background: rgba(28,28,28,.95); color: var(--white); border: 1px solid var(--border); }
     .btn-secondary:hover { border-color: var(--orange); color: var(--orange); }
-    .btn:disabled { opacity:.35; cursor:not-allowed; transform:none !important; }
+    .btn:disabled  { opacity:.35; cursor:not-allowed; transform:none !important; }
     .btn-lg { font-size: 1.05rem; padding: 14px 36px; }
     .btn-sm { font-size: .8rem; padding: 8px 16px; }
 
@@ -125,13 +122,18 @@
        SETUP
     ══════════════════ */
     #setup { max-width: 1000px; margin: 0 auto; }
+
     .setup-top {
-      display: flex; align-items: center; justify-content: space-between;
-      width: 100%; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;
+      display: flex; align-items: center; justify-content: center;
+      width: 100%; margin-bottom: 20px;
     }
     .setup-top-logo { display: flex; align-items: center; gap: 10px; }
     .setup-top-logo img { width: 40px; height: auto; }
-    .setup-top-logo span { font-size: 1.2rem; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; }
+    .setup-top-logo span {
+      font-size: 1.2rem; font-weight: 900;
+      letter-spacing: 3px; text-transform: uppercase;
+    }
+
     .setup-grid {
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 18px; width: 100%; margin-bottom: 22px;
@@ -152,7 +154,9 @@
       flex-shrink: 0; transition: border-color .2s; position: relative;
     }
     .avatar-upload:hover { border-color: var(--orange); }
-    .avatar-upload img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+    .avatar-upload img {
+      width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0;
+    }
     .avatar-upload .upload-hint {
       font-size: .58rem; color: var(--dim); text-align: center;
       line-height: 1.4; padding: 4px; z-index: 1;
@@ -185,8 +189,7 @@
     .skill-box input {
       width: 100%; padding: 9px; text-align: center;
       background: rgba(255,255,255,.05); border: 1px solid var(--border);
-      border-radius: 8px; color: var(--white);
-      font-size: 1.05rem; font-weight: 800;
+      border-radius: 8px; color: var(--white); font-size: 1.05rem; font-weight: 800;
     }
     .skill-box input:focus { outline: none; border-color: var(--orange); }
 
@@ -232,8 +235,8 @@
     }
     .score-panel.p1::before { background: var(--orange); }
     .score-panel.p2::before { background: var(--blue2); }
-    .score-panel.has-ball       { border-color: var(--orange); box-shadow: 0 0 20px rgba(255,109,0,.2); }
-    .score-panel.p2.has-ball    { border-color: var(--blue2); box-shadow: 0 0 20px rgba(41,121,255,.2); }
+    .score-panel.has-ball     { border-color: var(--orange); box-shadow: 0 0 20px rgba(255,109,0,.2); }
+    .score-panel.p2.has-ball  { border-color: var(--blue2); box-shadow: 0 0 20px rgba(41,121,255,.2); }
 
     .score-inner { display: flex; gap: 12px; align-items: flex-start; }
     .score-avatar {
@@ -258,6 +261,7 @@
     .pill.shoot { color: var(--green);  border-color: rgba(0,230,118,.3);  background: rgba(0,230,118,.06); }
     .pill.play  { color: var(--cyan);   border-color: rgba(0,229,255,.3);  background: rgba(0,229,255,.06); }
     .pill.def   { color: var(--red);    border-color: rgba(255,23,68,.3);   background: rgba(255,23,68,.06); }
+
     .ball-badge {
       display: inline-flex; align-items: center; gap: 4px;
       font-size: .68rem; font-weight: 700; padding: 3px 9px;
@@ -299,9 +303,9 @@
       font-size: 2.1rem; color: #000; font-weight: 900;
       box-shadow: 0 4px 14px rgba(0,0,0,.5);
     }
-    .die.dunk-roll   { background: var(--purple); color: #fff; box-shadow: 0 0 18px rgba(213,0,249,.5); }
-    .die.logo-roll   { background: var(--yellow); color: #000; box-shadow: 0 0 18px rgba(255,214,0,.5); }
-    .die.roll-anim   { animation: droll .35s ease; }
+    .die.dunk-roll { background: var(--purple); color: #fff; box-shadow: 0 0 18px rgba(213,0,249,.5); }
+    .die.logo-roll { background: var(--yellow); color: #000; box-shadow: 0 0 18px rgba(255,214,0,.5); }
+    .die.roll-anim { animation: droll .35s ease; }
     @keyframes droll {
       0%  { transform: rotate(0) scale(1); }
       30% { transform: rotate(18deg) scale(1.15); }
@@ -333,8 +337,7 @@
 
     .doubles-badge {
       display: inline-flex; align-items: center; gap: 6px;
-      font-size: .82rem; font-weight: 800; padding: 6px 14px;
-      border-radius: 20px;
+      font-size: .82rem; font-weight: 800; padding: 6px 14px; border-radius: 20px;
     }
     .doubles-badge.dunk { background: var(--purple); color: #fff; box-shadow: 0 0 16px rgba(213,0,249,.4); }
     .doubles-badge.logo { background: var(--yellow); color: #000; box-shadow: 0 0 16px rgba(255,214,0,.4); }
@@ -358,7 +361,7 @@
        WIN
     ══════════════════ */
     #winscreen { text-align: center; gap: 14px; justify-content: center; min-height: 100vh; }
-    .trophy { font-size: 4.5rem; }
+    .trophy    { font-size: 4.5rem; }
     .win-avatar {
       width: 90px; height: 90px; border-radius: 18px;
       overflow: hidden; border: 3px solid var(--orange);
@@ -392,9 +395,9 @@
 <body>
 
 <!-- ── Music Player ── -->
-<div class="music-bar" id="music-bar">
-  <button class="music-btn" id="music-toggle" onclick="toggleMusic()" title="Play/Pause">▶</button>
-  <button class="music-btn" onclick="nextTrack()" title="Next track">⏭</button>
+<div class="music-bar">
+  <button class="music-btn" id="music-toggle" onclick="toggleMusic()">⏸</button>
+  <button class="music-btn" onclick="nextTrack()">⏭</button>
   <span class="music-track" id="music-track-name">—</span>
   <input type="range" class="music-vol" id="music-vol" min="0" max="1" step="0.05" value="0.5" oninput="setVolume(this.value)"/>
 </div>
@@ -404,9 +407,7 @@
 ══════════════════════════════════ -->
 <div id="home" class="screen active">
   <div class="home-hero">
-    <div class="home-logo">
-      <img src="logo.png" alt="Ballerz"/>
-    </div>
+    <div class="home-logo"><img src="logo.png" alt="Ballerz"/></div>
     <div class="home-title">Street <span>Run</span></div>
     <div class="home-tagline">1v1 · Real NFT Skills · Street Rules</div>
 
@@ -422,7 +423,7 @@
         <tr><td>10–11</td><td>🏹 Three Pointer</td><td>3</td><td style="color:var(--green);">Shooting</td></tr>
       </tbody>
     </table>
-    <div style="font-size:.72rem;color:var(--dim);margin-top:-10px;text-align:left;width:100%;">* Any doubles except 6+6</div>
+    <div style="font-size:.72rem;color:var(--dim);text-align:left;width:100%;">* Any doubles except 6+6</div>
 
     <div class="rules-pills">
       <div class="rule-pill" style="background:rgba(255,23,68,.07);border:1px solid rgba(255,23,68,.2);">
@@ -447,7 +448,7 @@
   <div class="setup-top">
     <div class="setup-top-logo">
       <img src="logo.png" alt="Ballerz"/>
-    </div>
+      <span>Ballerz</span>
     </div>
   </div>
 
@@ -483,24 +484,9 @@
       </div>
 
       <div class="section-label">Accessories (up to 3)</div>
-      <div class="field">
-        <label>Accessory 1</label>
-        <select id="p1-acc1" onchange="filterAccessories(1);updatePreview(1)">
-          <option value="">— None —</option>
-        </select>
-      </div>
-      <div class="field">
-        <label>Accessory 2</label>
-        <select id="p1-acc2" onchange="filterAccessories(1);updatePreview(1)">
-          <option value="">— None —</option>
-        </select>
-      </div>
-      <div class="field">
-        <label>Accessory 3</label>
-        <select id="p1-acc3" onchange="updatePreview(1)">
-          <option value="">— None —</option>
-        </select>
-      </div>
+      <div class="field"><label>Accessory 1</label><select id="p1-acc1" onchange="filterAccessories(1);updatePreview(1)"></select></div>
+      <div class="field"><label>Accessory 2</label><select id="p1-acc2" onchange="filterAccessories(1);updatePreview(1)"></select></div>
+      <div class="field"><label>Accessory 3</label><select id="p1-acc3" onchange="updatePreview(1)"></select></div>
 
       <div class="field">
         <label>Special (Face Trait)</label>
@@ -556,24 +542,9 @@
       </div>
 
       <div class="section-label">Accessories (up to 3)</div>
-      <div class="field">
-        <label>Accessory 1</label>
-        <select id="p2-acc1" onchange="filterAccessories(2);updatePreview(2)">
-          <option value="">— None —</option>
-        </select>
-      </div>
-      <div class="field">
-        <label>Accessory 2</label>
-        <select id="p2-acc2" onchange="filterAccessories(2);updatePreview(2)">
-          <option value="">— None —</option>
-        </select>
-      </div>
-      <div class="field">
-        <label>Accessory 3</label>
-        <select id="p2-acc3" onchange="updatePreview(2)">
-          <option value="">— None —</option>
-        </select>
-      </div>
+      <div class="field"><label>Accessory 1</label><select id="p2-acc1" onchange="filterAccessories(2);updatePreview(2)"></select></div>
+      <div class="field"><label>Accessory 2</label><select id="p2-acc2" onchange="filterAccessories(2);updatePreview(2)"></select></div>
+      <div class="field"><label>Accessory 3</label><select id="p2-acc3" onchange="updatePreview(2)"></select></div>
 
       <div class="field">
         <label>Special (Face Trait)</label>
@@ -654,7 +625,7 @@
     <div class="court-label" id="court-label">JUMP BALL</div>
     <div class="phase-title"  id="phase-title">Who gets first possession?</div>
     <div id="court-body"></div>
-    <div class="action-row" id="action-row"></div>
+    <div class="action-row"   id="action-row"></div>
   </div>
 
   <div class="log-wrap" id="log-wrap"><h4>📋 Play-by-Play</h4></div>
@@ -677,18 +648,16 @@
 
 <script>
 // ══════════════════════════════════════════════════════
-//  MUSIC
+//  MUSIC — shuffle queue, no repeats until all played
 // ══════════════════════════════════════════════════════
 
-const TRACKS = [
-  'track1.mp3','track2.mp3','track3.mp3',
-  'track4.mp3','track5.mp3','track6.mp3'
-];
-
+const TRACKS = ['track1.mp3','track2.mp3','track3.mp3','track4.mp3','track5.mp3','track6.mp3'];
 let audio        = new Audio();
 let trackQueue   = [];
-let currentTrack = -1;
-let musicStarted = false;
+let currentTrack = 0;
+let musicReady   = false;
+
+audio.volume = 0.5;
 
 function shuffleQueue() {
   let arr = [...TRACKS];
@@ -696,44 +665,62 @@ function shuffleQueue() {
     const j = Math.floor(Math.random() * (i + 1));
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
-  // Avoid same track repeating across shuffle boundaries
+  // Prevent same track repeating across boundary
   if (trackQueue.length && arr[0] === trackQueue[trackQueue.length - 1]) {
     const swap = Math.floor(Math.random() * (arr.length - 1)) + 1;
     [arr[0], arr[swap]] = [arr[swap], arr[0]];
   }
-  trackQueue = arr;
+  trackQueue   = arr;
   currentTrack = 0;
 }
 
-function playNextTrack() {
-  if (currentTrack >= trackQueue.length || trackQueue.length === 0) shuffleQueue();
+function loadAndPlay() {
+  if (currentTrack >= trackQueue.length) shuffleQueue();
   const track = trackQueue[currentTrack++];
-  audio.src = track;
-  audio.volume = parseFloat(document.getElementById('music-vol').value);
+  audio.src   = track;
+  audio.load();
   audio.play().catch(() => {});
   document.getElementById('music-track-name').textContent =
-    track.replace('.mp3','').replace('track','Track ');
+    'Track ' + track.replace('track','').replace('.mp3','');
   document.getElementById('music-toggle').textContent = '⏸';
 }
 
-audio.addEventListener('ended', playNextTrack);
+audio.addEventListener('ended', loadAndPlay);
 
-function startMusic() {
-  if (!musicStarted) {
-    musicStarted = true;
-    shuffleQueue();
-    playNextTrack();
-  }
+function initMusic() {
+  if (musicReady) return;
+  musicReady = true;
+  shuffleQueue();
+  loadAndPlay();
 }
+
+// Try to autoplay immediately — browsers may block until interaction
+window.addEventListener('load', () => {
+  shuffleQueue();
+  audio.src = trackQueue[currentTrack++];
+  audio.load();
+  const playPromise = audio.play();
+  if (playPromise !== undefined) {
+    playPromise.then(() => {
+      musicReady = true;
+      document.getElementById('music-track-name').textContent =
+        'Track ' + audio.src.split('track')[1].replace('.mp3','');
+      document.getElementById('music-toggle').textContent = '⏸';
+    }).catch(() => {
+      // Autoplay blocked — wait for first interaction
+      document.addEventListener('click', function startOnce() {
+        if (!musicReady) initMusic();
+        document.removeEventListener('click', startOnce);
+      }, { once: true });
+    });
+  }
+});
 
 function toggleMusic() {
   if (audio.paused) {
-    if (!audio.src || audio.src === window.location.href) {
-      startMusic();
-    } else {
-      audio.play();
-      document.getElementById('music-toggle').textContent = '⏸';
-    }
+    if (!musicReady) { initMusic(); return; }
+    audio.play();
+    document.getElementById('music-toggle').textContent = '⏸';
   } else {
     audio.pause();
     document.getElementById('music-toggle').textContent = '▶';
@@ -742,19 +729,10 @@ function toggleMusic() {
 
 function nextTrack() {
   audio.pause();
-  if (currentTrack >= trackQueue.length) shuffleQueue();
-  playNextTrack();
+  loadAndPlay();
 }
 
-function setVolume(v) {
-  audio.volume = parseFloat(v);
-}
-
-// Auto-start on first user interaction
-document.addEventListener('click', function startOnce() {
-  startMusic();
-  document.removeEventListener('click', startOnce);
-}, { once: true });
+function setVolume(v) { audio.volume = parseFloat(v); }
 
 // ══════════════════════════════════════════════════════
 //  NFT DATA
@@ -813,13 +791,12 @@ const SPECIALS = {
   "Tongue Out":  { Inside:3, DunksLayups:4, FreeThrows:3, MidRange:3, ThreePT:3, OffIQ:3, DefIQ:3, Dribbling:3, Passing:3, Rebounding:2, Height:3, Strength:3, Speed:3, Jumping:4 },
 };
 
-// Shot make thresholds (d6 + skill must meet or beat)
 const SHOT_THRESHOLDS = {
+  'Logo Shot':     { skill:'shooting', threshold:87 },
   'Slam Dunk':     { skill:'dunking',  threshold:78 },
   'Layup':         { skill:'dunking',  threshold:74 },
   'Deep Two':      { skill:'shooting', threshold:77 },
   'Three Pointer': { skill:'shooting', threshold:81 },
-  'Logo Shot':     { skill:'shooting', threshold:87 },
 };
 
 // ══════════════════════════════════════════════════════
@@ -828,35 +805,30 @@ const SHOT_THRESHOLDS = {
 
 function buildAccOptions(exclude = []) {
   return ['<option value="">— None —</option>',
-    ...ALL_ACCESSORIES
-      .filter(a => !exclude.includes(a))
+    ...ALL_ACCESSORIES.filter(a => !exclude.includes(a))
       .map(a => `<option value="${a}">${a}</option>`)
   ].join('');
 }
 
 function filterAccessories(p) {
-  const v1 = document.getElementById(`p${p}-acc1`).value;
-  const v2 = document.getElementById(`p${p}-acc2`).value;
-
+  const v1  = document.getElementById(`p${p}-acc1`).value;
   const sel2 = document.getElementById(`p${p}-acc2`);
   const sel3 = document.getElementById(`p${p}-acc3`);
-
-  const cur2 = sel2.value;
-  const cur3 = sel3.value;
+  const cur2 = sel2.value, cur3 = sel3.value;
 
   sel2.innerHTML = buildAccOptions(v1 ? [v1] : []);
-  sel2.value = cur2 && cur2 !== v1 ? cur2 : '';
+  sel2.value = cur2 !== v1 ? cur2 : '';
 
   const ex3 = [v1, sel2.value].filter(Boolean);
   sel3.innerHTML = buildAccOptions(ex3);
-  sel3.value = cur3 && !ex3.includes(cur3) ? cur3 : '';
+  sel3.value = !ex3.includes(cur3) ? cur3 : '';
 }
 
 function initAccessories() {
-  [1, 2].forEach(p => {
-    document.getElementById(`p${p}-acc1`).innerHTML = buildAccOptions();
-    document.getElementById(`p${p}-acc2`).innerHTML = buildAccOptions();
-    document.getElementById(`p${p}-acc3`).innerHTML = buildAccOptions();
+  [1,2].forEach(p => {
+    ['acc1','acc2','acc3'].forEach(a => {
+      document.getElementById(`p${p}-${a}`).innerHTML = buildAccOptions();
+    });
   });
 }
 
@@ -867,35 +839,32 @@ function initAccessories() {
 function rawToGameStats(base, bodyKey, accKeys, specialKey) {
   const bt = BODY_TYPES[bodyKey]  || {};
   const sp = SPECIALS[specialKey] || {};
-
   const raw = { Inside:0, DunksLayups:0, FreeThrows:0, MidRange:0, ThreePT:0, OffIQ:0, DefIQ:0, Dribbling:0, Passing:0, Rebounding:0 };
 
   accKeys.forEach(k => {
     const ac = ACCESSORIES[k] || {};
-    Object.keys(raw).forEach(s => { raw[s] += (ac[s] || 0); });
+    Object.keys(raw).forEach(s => { raw[s] += (ac[s]||0); });
   });
-  Object.keys(raw).forEach(s => { raw[s] += (sp[s] || 0); });
+  Object.keys(raw).forEach(s => { raw[s] += (sp[s]||0); });
 
   const phys = {
-    Height:   (bt.Height||0)   + (sp.Height||0),
-    Jumping:  (bt.Jumping||0)  + (sp.Jumping||0),
-    Speed:    (bt.Speed||0)    + (sp.Speed||0),
+    Height:  (bt.Height||0)  + (sp.Height||0),
+    Jumping: (bt.Jumping||0) + (sp.Jumping||0),
+    Speed:   (bt.Speed||0)   + (sp.Speed||0),
   };
 
   return {
-    dunking:    Math.min(99, base.dunking    + Math.round((raw.Inside + raw.DunksLayups) / 3) + Math.round(phys.Jumping / 2)),
-    shooting:   Math.min(99, base.shooting   + Math.round((raw.MidRange + raw.ThreePT + raw.FreeThrows) / 3)),
-    playmaking: Math.min(99, base.playmaking + Math.round((raw.OffIQ + raw.Dribbling + raw.Passing) / 3) + Math.round(phys.Speed / 2)),
-    defense:    Math.min(99, base.defense    + Math.round((raw.DefIQ + raw.Rebounding) / 3) + Math.round(phys.Height / 2)),
+    dunking:    Math.min(99, base.dunking    + Math.round((raw.Inside + raw.DunksLayups)/3) + Math.round(phys.Jumping/2)),
+    shooting:   Math.min(99, base.shooting   + Math.round((raw.MidRange + raw.ThreePT + raw.FreeThrows)/3)),
+    playmaking: Math.min(99, base.playmaking + Math.round((raw.OffIQ + raw.Dribbling + raw.Passing)/3) + Math.round(phys.Speed/2)),
+    defense:    Math.min(99, base.defense    + Math.round((raw.DefIQ + raw.Rebounding)/3) + Math.round(phys.Height/2)),
   };
 }
 
 function getAccKeys(p) {
-  return [
-    document.getElementById(`p${p}-acc1`).value,
-    document.getElementById(`p${p}-acc2`).value,
-    document.getElementById(`p${p}-acc3`).value,
-  ].filter(Boolean);
+  return ['acc1','acc2','acc3']
+    .map(a => document.getElementById(`p${p}-${a}`).value)
+    .filter(Boolean);
 }
 
 function updatePreview(n) {
@@ -911,44 +880,40 @@ function updatePreview(n) {
     getAccKeys(n),
     document.getElementById(`p${n}-special`).value
   );
-
-  const bars = [
+  document.getElementById(`p${n}-bars`).innerHTML = [
     { label:'🏀 Dunking',    val:final.dunking,    color:'var(--purple)' },
     { label:'🎯 Shooting',   val:final.shooting,   color:'var(--green)'  },
     { label:'🎮 Playmaking', val:final.playmaking, color:'var(--cyan)'   },
     { label:'🛡 Defense',    val:final.defense,    color:'var(--red)'    },
-  ];
-
-  document.getElementById(`p${n}-bars`).innerHTML = bars.map(b => `
+  ].map(b => `
     <div class="stat-bar-row">
       <div class="stat-bar-label">${b.label}</div>
       <div class="stat-bar-track"><div class="stat-bar-fill" style="width:${b.val}%;background:${b.color};"></div></div>
       <div class="stat-bar-val" style="color:${b.color};">${b.val}</div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
 // ══════════════════════════════════════════════════════
-//  HELPERS
+//  GAME STATE
 // ══════════════════════════════════════════════════════
 
 const DICE_FACES = ['⚀','⚁','⚂','⚃','⚄','⚅'];
 const P_COLORS   = ['var(--orange)','var(--blue2)'];
 
-let players     = [];
-let possession  = 0;
-let pendingShot = null;
-let lastSetup   = null;
-let avatarData  = { 1: null, 2: null };
-let offRebStreak = [0, 0]; // consecutive offensive rebounds per player
+let players      = [];
+let possession   = 0;
+let pendingShot  = null;
+let lastSetup    = null;
+let avatarData   = { 1:null, 2:null };
+let offRebStreak = [0,0];
 
-function d6()   { return Math.floor(Math.random() * 6) + 1; }
-function d6x2() { return [d6(), d6()]; }
+function d6()   { return Math.floor(Math.random()*6)+1; }
+function d6x2() { return [d6(),d6()]; }
 
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  window.scrollTo(0, 0);
+  window.scrollTo(0,0);
 }
 
 function setCourtLabel(t) { document.getElementById('court-label').textContent = t; }
@@ -960,7 +925,7 @@ function setActions(buttons) {
   row.innerHTML = '';
   buttons.forEach(b => {
     const btn = document.createElement('button');
-    btn.className = 'btn ' + (b.cls || 'btn-primary');
+    btn.className = 'btn '+(b.cls||'btn-primary');
     btn.textContent = b.label;
     btn.onclick = b.fn;
     row.appendChild(btn);
@@ -970,17 +935,17 @@ function setActions(buttons) {
 function log(msg, cls='') {
   const wrap = document.getElementById('log-wrap');
   const el = document.createElement('div');
-  el.className = 'log-line ' + cls;
+  el.className = 'log-line '+cls;
   el.textContent = msg;
   wrap.appendChild(el);
   wrap.scrollTop = wrap.scrollHeight;
 }
 
 function updateScoreboard() {
-  players.forEach((p, i) => {
+  players.forEach((p,i) => {
     document.getElementById(`g-p${i+1}-score`).textContent  = p.score;
-    document.getElementById(`g-p${i+1}-ball`).style.display = possession === i ? 'block' : 'none';
-    document.getElementById(`sp${i+1}`).classList.toggle('has-ball', possession === i);
+    document.getElementById(`g-p${i+1}-ball`).style.display = possession===i?'block':'none';
+    document.getElementById(`sp${i+1}`).classList.toggle('has-ball', possession===i);
   });
 }
 
@@ -1004,9 +969,7 @@ function loadAvatar(e, n) {
 // ══════════════════════════════════════════════════════
 
 function startGame() {
-  players   = [];
-  lastSetup = [];
-  offRebStreak = [0, 0];
+  players = []; lastSetup = []; offRebStreak = [0,0];
 
   for (let i = 1; i <= 2; i++) {
     const name    = document.getElementById(`p${i}-name`).value.trim() || `Player ${i}`;
@@ -1020,13 +983,13 @@ function startGame() {
       defense:    parseInt(document.getElementById(`p${i}-defense`).value)    || 75,
     };
     const final = rawToGameStats(base, body, accKeys, special);
-
-    const p = { id:i-1, name, body, accKeys, special, score:0, avatar: avatarData[i], ...final };
+    const p = { id:i-1, name, body, accKeys, special, score:0, avatar:avatarData[i], ...final };
     players.push(p);
+    lastSetup.push({ name, body, accKeys, special, base });
 
     document.getElementById(`g-p${i}-name`).textContent = name;
     document.getElementById(`g-p${i}-sub`).textContent  =
-      [body, ...accKeys, special !== 'None' ? '⭐ '+special : ''].filter(Boolean).join(' · ');
+      [body, ...accKeys, special!=='None'?'⭐ '+special:''].filter(Boolean).join(' · ');
 
     const avEl = document.getElementById(`g-av${i}`);
     avEl.innerHTML = p.avatar
@@ -1034,11 +997,11 @@ function startGame() {
       : '🏀';
 
     document.getElementById(`g-p${i}-pills`).innerHTML = [
-      { l:`🏀 ${p.dunking}`,    c:'dunk'  },
-      { l:`🎯 ${p.shooting}`,   c:'shoot' },
-      { l:`🎮 ${p.playmaking}`, c:'play'  },
-      { l:`🛡 ${p.defense}`,    c:'def'   },
-    ].map(x => `<span class="pill ${x.c}">${x.l}</span>`).join('');
+      {l:`🏀 ${p.dunking}`,    c:'dunk' },
+      {l:`🎯 ${p.shooting}`,   c:'shoot'},
+      {l:`🎮 ${p.playmaking}`, c:'play' },
+      {l:`🛡 ${p.defense}`,    c:'def'  },
+    ].map(x=>`<span class="pill ${x.c}">${x.l}</span>`).join('');
   }
 
   document.getElementById('log-wrap').innerHTML = '<h4>📋 Play-by-Play</h4>';
@@ -1061,9 +1024,8 @@ function doJumpBall() {
       <div style="font-size:.84rem;color:var(--dim);">
         Highest <strong style="color:var(--white);">Dunking</strong> wins the tip.<br/>Ties settled by d6 roll-off.
       </div>
-    </div>
-  `);
-  setActions([{ label:'🎲 Tip Off!', cls:'btn-primary btn-lg', fn: resolveJumpBall }]);
+    </div>`);
+  setActions([{label:'🎲 Tip Off!', cls:'btn-primary btn-lg', fn:resolveJumpBall}]);
 }
 
 function resolveJumpBall() {
@@ -1071,16 +1033,16 @@ function resolveJumpBall() {
   let winner;
   if (p0.dunking !== p1.dunking) {
     winner = p0.dunking > p1.dunking ? 0 : 1;
-    log(`🏀 Tip-off: ${p0.name}(${p0.dunking}) vs ${p1.name}(${p1.dunking}) → ${players[winner].name} wins!`, 'info');
+    log(`🏀 Tip-off: ${p0.name}(${p0.dunking}) vs ${p1.name}(${p1.dunking}) → ${players[winner].name} wins!`,'info');
   } else {
-    const r0 = d6(), r1 = d6();
-    winner = r0 >= r1 ? 0 : 1;
-    log(`🏀 Tie! Roll-off: ${p0.name}(${r0}) vs ${p1.name}(${r1}) → ${players[winner].name}!`, 'info');
+    const r0=d6(), r1=d6();
+    winner = r0>=r1?0:1;
+    log(`🏀 Tie! Roll-off: ${p0.name}(${r0}) vs ${p1.name}(${r1}) → ${players[winner].name}!`,'info');
   }
   possession = winner;
   updateScoreboard();
   setCourtBody(`<div class="outcome info fade">${players[winner].name} gets the ball! 🏀</div>`);
-  setActions([{ label:'▶ Start', cls:'btn-primary', fn: startPossession }]);
+  setActions([{label:'▶ Start', cls:'btn-primary', fn:startPossession}]);
 }
 
 // ══════════════════════════════════════════════════════
@@ -1097,58 +1059,49 @@ function startPossession() {
       <div class="die" id="die1">⚀</div>
       <div class="die" id="die2">⚀</div>
       <div class="dice-total" id="dice-total" style="opacity:.3;">—</div>
-    </div>
-  `);
-  setActions([{ label:'🎲 Roll for Shot', cls:'btn-primary btn-lg', fn: rollForShot }]);
+    </div>`);
+  setActions([{label:'🎲 Roll for Shot', cls:'btn-primary btn-lg', fn:rollForShot}]);
 }
 
 function rollForShot() {
   const dice  = d6x2();
-  const total = dice[0] + dice[1];
-  const isDoubles = dice[0] === dice[1];
-  const isLogo    = dice[0] === 6 && dice[1] === 6;
+  const total = dice[0]+dice[1];
+  const isDoubles = dice[0]===dice[1];
+  const isLogo    = dice[0]===6 && dice[1]===6;
 
   let shot;
-  if (isLogo) {
-    shot = { label:'Logo Shot',    icon:'⚡', pts:4, skill:'shooting', color:'var(--yellow)', type:'logo' };
-  } else if (isDoubles) {
-    shot = { label:'Slam Dunk',    icon:'🔥', pts:2, skill:'dunking',  color:'var(--purple)', type:'dunk' };
-  } else if (total <= 7) {
-    shot = { label:'Layup',        icon:'🏃', pts:1, skill:'dunking',  color:'var(--blue2)',  type:'normal' };
-  } else if (total <= 9) {
-    shot = { label:'Deep Two',     icon:'💪', pts:2, skill:'shooting', color:'var(--cyan)',   type:'normal' };
-  } else {
-    shot = { label:'Three Pointer',icon:'🏹', pts:3, skill:'shooting', color:'var(--green)',  type:'normal' };
-  }
+  if (isLogo)         shot = {label:'Logo Shot',    icon:'⚡', pts:4, skill:'shooting', color:'var(--yellow)', type:'logo'};
+  else if (isDoubles) shot = {label:'Slam Dunk',    icon:'🔥', pts:2, skill:'dunking',  color:'var(--purple)', type:'dunk'};
+  else if (total<=7)  shot = {label:'Layup',        icon:'🏃', pts:1, skill:'dunking',  color:'var(--blue2)',  type:'normal'};
+  else if (total<=9)  shot = {label:'Deep Two',     icon:'💪', pts:2, skill:'shooting', color:'var(--cyan)',   type:'normal'};
+  else                shot = {label:'Three Pointer',icon:'🏹', pts:3, skill:'shooting', color:'var(--green)',  type:'normal'};
 
-  const dc = isLogo ? 'logo-roll' : isDoubles ? 'dunk-roll' : '';
-  ['die1','die2'].forEach((id, i) => {
+  const dc = isLogo?'logo-roll':isDoubles?'dunk-roll':'';
+  ['die1','die2'].forEach((id,i) => {
     const el = document.getElementById(id);
-    el.classList.add('roll-anim');
-    if (dc) el.classList.add(dc);
+    el.className = 'die roll-anim'+(dc?' '+dc:'');
     el.textContent = DICE_FACES[dice[i]-1];
-    setTimeout(() => { el.classList.remove('roll-anim'); }, 380);
+    setTimeout(()=>el.classList.remove('roll-anim'),380);
   });
   const dt = document.getElementById('dice-total');
-  dt.style.opacity = '1';
-  dt.textContent = isDoubles ? (isLogo ? '6+6!' : `${dice[0]}+${dice[1]}`) : total;
+  dt.style.opacity='1';
+  dt.textContent = isDoubles?(isLogo?'6+6!':dice[0]+'+'+dice[1]):total;
 
-  log(`🎲 ${players[possession].name} rolled ${dice[0]}+${dice[1]}=${total} → ${isDoubles?(isLogo?'⚡ Logo Shot!':'🔥 Slam Dunk!'):shot.icon+' '+shot.label}`, 'event');
+  log(`🎲 ${players[possession].name} rolled ${dice[0]}+${dice[1]}=${total} → ${shot.icon} ${shot.label}`,'event');
   pendingShot = shot;
-  setTimeout(() => showShotCard(shot), 440);
+  setTimeout(()=>showShotCard(shot),440);
 }
 
 function showShotCard(shot) {
-  const off = players[possession];
-  const def = players[1 - possession];
+  const off    = players[possession];
+  const def    = players[1-possession];
   const thresh = SHOT_THRESHOLDS[shot.label];
-
   setCourtLabel('SHOT SELECTION');
   setPhaseTitle('');
   setCourtBody(`
     <div class="shot-card fade" style="border-color:${shot.color};">
-      ${shot.type === 'logo' ? `<div class="doubles-badge logo" style="margin-bottom:8px;">⚡ 6+6 LOGO SHOT!</div>` :
-        shot.type === 'dunk' ? `<div class="doubles-badge dunk" style="margin-bottom:8px;">🔥 DOUBLES — SLAM DUNK!</div>` : ''}
+      ${shot.type==='logo'?`<div class="doubles-badge logo" style="margin-bottom:8px;">⚡ 6+6 LOGO SHOT!</div>`:
+        shot.type==='dunk'?`<div class="doubles-badge dunk" style="margin-bottom:8px;">🔥 DOUBLES — SLAM DUNK!</div>`:''}
       <div class="shot-icon">${shot.icon}</div>
       <div class="shot-name" style="color:${shot.color};">${shot.label}</div>
       <div class="shot-meta">Worth <strong>${shot.pts} pt${shot.pts>1?'s':''}</strong></div>
@@ -1158,9 +1111,8 @@ function showShotCard(shot) {
     </div>
     <div style="font-size:.78rem;color:var(--dim);text-align:center;">
       🛡 ${def.name} must roll <strong style="color:var(--white);">doubles</strong> to block
-    </div>
-  `);
-  setActions([{ label:'🛡 Defender Rolls', cls:'btn-primary btn-lg', fn: rollDefense }]);
+    </div>`);
+  setActions([{label:'🛡 Defender Rolls', cls:'btn-primary btn-lg', fn:rollDefense}]);
 }
 
 // ══════════════════════════════════════════════════════
@@ -1169,12 +1121,11 @@ function showShotCard(shot) {
 
 function rollDefense() {
   const off  = players[possession];
-  const def  = players[1 - possession];
-  const shot = pendingShot;
+  const def  = players[1-possession];
   const dice = d6x2();
-  const doubles = dice[0] === dice[1];
+  const doubles = dice[0]===dice[1];
+  const dc = doubles?'dunk-roll':'';
 
-  const dc = doubles ? 'dunk-roll' : '';
   setCourtLabel('DEFENSE');
   setPhaseTitle(`${def.name} tries to block!`);
   setCourtBody(`
@@ -1182,20 +1133,19 @@ function rollDefense() {
     <div class="dice-row">
       <div class="die ${dc} roll-anim">${DICE_FACES[dice[0]-1]}</div>
       <div class="die ${dc} roll-anim">${DICE_FACES[dice[1]-1]}</div>
-    </div>
-  `);
+    </div>`);
 
   if (doubles) {
-    log(`🛡 ${def.name} rolled doubles (${dice[0]}-${dice[1]}) — BLOCKED!`, 'bad');
-    setTimeout(() => showBlockResult(dice), 500);
+    log(`🛡 ${def.name} rolled doubles (${dice[0]}-${dice[1]}) — BLOCKED!`,'bad');
+    setTimeout(()=>showBlockResult(dice),500);
   } else {
-    log(`🏀 No doubles (${dice[0]}-${dice[1]}) — ${off.name} attempts the shot!`, 'info');
-    setTimeout(() => rollShotAttempt(shot), 500);
+    log(`🏀 No doubles (${dice[0]}-${dice[1]}) — ${off.name} attempts the shot!`,'info');
+    setTimeout(()=>rollShotAttempt(pendingShot),500);
   }
 }
 
 // ══════════════════════════════════════════════════════
-//  SHOT ATTEMPT (make or miss)
+//  SHOT ATTEMPT
 // ══════════════════════════════════════════════════════
 
 function rollShotAttempt(shot) {
@@ -1205,34 +1155,32 @@ function rollShotAttempt(shot) {
   const total  = die + off[thresh.skill];
   const made   = total >= thresh.threshold;
 
-  log(`${shot.icon} ${off.name} shoots: d6(${die}) + ${thresh.skill}(${off[thresh.skill]}) = ${total} vs ${thresh.threshold} — ${made ? '✅ MADE' : '❌ MISSED'}`, made ? 'good' : 'bad');
+  log(`${shot.icon} ${off.name}: d6(${die})+${thresh.skill}(${off[thresh.skill]})=${total} vs ${thresh.threshold} — ${made?'✅ MADE':'❌ MISSED'}`, made?'good':'bad');
 
   setCourtLabel('SHOT ATTEMPT');
   setPhaseTitle('');
   setCourtBody(`
-    <div class="shot-card fade" style="border-color:${made ? 'var(--green)' : 'var(--red)'};">
+    <div class="shot-card fade" style="border-color:${made?'var(--green)':'var(--red)'};">
       <div class="shot-icon">${shot.icon}</div>
       <div class="shot-name" style="color:${shot.color};">${shot.label}</div>
       <div style="margin-top:12px;">
         <div style="font-size:2rem;font-weight:900;color:${made?'var(--green)':'var(--red)'};">${total}</div>
-        <div style="font-size:.75rem;color:var(--dim);">d6(${die}) + ${thresh.skill}(${off[thresh.skill]}) vs ${thresh.threshold}</div>
+        <div style="font-size:.75rem;color:var(--dim);">d6(${die})+${thresh.skill}(${off[thresh.skill]}) vs ${thresh.threshold}</div>
       </div>
     </div>
-    <div class="outcome ${made?'made':'missed'} pop">${made ? `BUCKET! +${shot.pts} 🏀` : 'MISSED! 😤'}</div>
-  `);
+    <div class="outcome ${made?'made':'missed'} pop">${made?`BUCKET! +${shot.pts} 🏀`:'MISSED! 😤'}</div>`);
 
   if (made) {
     off.score += shot.pts;
-    offRebStreak[possession] = 0;
-    offRebStreak[1 - possession] = 0;
+    offRebStreak = [0,0];
     updateScoreboard();
-    log(`✅ ${off.name} scores +${shot.pts}! — ${players[0].name} ${players[0].score}–${players[1].score} ${players[1].name}`, 'good');
-    if (off.score >= 21) { setTimeout(() => endGame(possession), 700); return; }
-    possession = 1 - possession;
+    log(`✅ ${off.name} scores +${shot.pts}! — ${players[0].name} ${players[0].score}–${players[1].score} ${players[1].name}`,'good');
+    if (off.score>=21) { setTimeout(()=>endGame(possession),700); return; }
+    possession = 1-possession;
     updateScoreboard();
-    setActions([{ label:'▶ Next Possession', cls:'btn-primary', fn: startPossession }]);
+    setActions([{label:'▶ Next Possession', cls:'btn-primary', fn:startPossession}]);
   } else {
-    setActions([{ label:'🔄 Rebound Battle', cls:'btn-primary', fn: rollRebound }]);
+    setActions([{label:'🔄 Rebound Battle', cls:'btn-primary', fn:rollRebound}]);
   }
 }
 
@@ -1250,57 +1198,41 @@ function showBlockResult(blockDice) {
         Both players fight for the rebound.<br/>
         Roll d6 + <strong style="color:var(--white);">Defense + Dunking</strong> — consecutive off-boards penalized.
       </div>
-    </div>
-  `);
-  setActions([{ label:'🔄 Rebound Battle', cls:'btn-primary btn-lg', fn: rollRebound }]);
+    </div>`);
+  setActions([{label:'🔄 Rebound Battle', cls:'btn-primary btn-lg', fn:rollRebound}]);
 }
 
 function rollRebound() {
-  const p0 = players[0], p1 = players[1];
-  const r0d = d6(), r1d = d6();
+  const p0=players[0], p1=players[1];
+  const r0d=d6(), r1d=d6();
+  let r0 = r0d+p0.defense+p0.dunking;
+  let r1 = r1d+p1.defense+p1.dunking;
 
-  // Base rebound scores
-  let r0 = r0d + p0.defense + p0.dunking;
-  let r1 = r1d + p1.defense + p1.dunking;
-
-  // Consecutive offensive rebound penalty — halve score each time
-  const streak0 = offRebStreak[0];
-  const streak1 = offRebStreak[1];
-
-  // Only penalize if they currently have possession (they'd be going for off reb)
-  if (possession === 0 && streak0 > 0) {
-    r0 = Math.floor(r0 / Math.pow(2, streak0));
-    log(`⚠️ ${p0.name} off-reb streak ×${streak0} — score halved to ${r0}`, 'info');
+  // Consecutive offensive rebound penalty
+  if (possession===0 && offRebStreak[0]>0) {
+    r0 = Math.floor(r0/Math.pow(2,offRebStreak[0]));
+    log(`⚠️ ${p0.name} off-reb streak ×${offRebStreak[0]} — penalized to ${r0}`,'info');
   }
-  if (possession === 1 && streak1 > 0) {
-    r1 = Math.floor(r1 / Math.pow(2, streak1));
-    log(`⚠️ ${p1.name} off-reb streak ×${streak1} — score halved to ${r1}`, 'info');
+  if (possession===1 && offRebStreak[1]>0) {
+    r1 = Math.floor(r1/Math.pow(2,offRebStreak[1]));
+    log(`⚠️ ${p1.name} off-reb streak ×${offRebStreak[1]} — penalized to ${r1}`,'info');
   }
 
-  let winner;
-  if (r0 !== r1) {
-    winner = r0 > r1 ? 0 : 1;
-  } else {
-    winner = possession; // tie → offense
-    log('🔄 Rebound tied — offense keeps ball.', 'info');
-  }
+  let winner = r0!==r1 ? (r0>r1?0:1) : possession;
+  if (r0===r1) log('🔄 Rebound tied — offense keeps ball.','info');
 
-  // Track offensive rebound streak
-  if (winner === possession) {
+  if (winner===possession) {
     offRebStreak[possession]++;
-    offRebStreak[1 - possession] = 0;
-    log(`🔄 ${players[winner].name} grabs offensive rebound! (streak: ${offRebStreak[winner]})`, 'info');
+    offRebStreak[1-possession]=0;
   } else {
-    offRebStreak[0] = 0;
-    offRebStreak[1] = 0;
-    log(`🔄 ${players[winner].name} grabs the defensive board!`, 'info');
+    offRebStreak=[0,0];
   }
 
-  log(`🔄 Rebound: ${p0.name}=${r0} vs ${p1.name}=${r1} → ${players[winner].name} wins!`, 'info');
-  possession = winner;
+  log(`🔄 Rebound: ${p0.name}=${r0} vs ${p1.name}=${r1} → ${players[winner].name} wins!`,'info');
+  possession=winner;
   updateScoreboard();
 
-  const p0w = winner === 0;
+  const p0w=winner===0;
   setCourtLabel('REBOUND');
   setPhaseTitle('');
   setCourtBody(`
@@ -1308,18 +1240,17 @@ function rollRebound() {
       <div class="result-box ${p0w?'win':'lose'}">
         <div class="rb-label">🔄 ${p0.name}</div>
         <div class="rb-val">${r0}</div>
-        <div class="rb-detail">d6(${r0d})+Def(${p0.defense})+Dunk(${p0.dunking})${streak0&&possession===0?' ÷'+Math.pow(2,streak0):''}</div>
+        <div class="rb-detail">d6(${r0d})+Def(${p0.defense})+Dunk(${p0.dunking})</div>
       </div>
       <div class="vs-divider">${p0w?'>':'<'}</div>
       <div class="result-box ${!p0w?'win':'lose'}">
         <div class="rb-label">🔄 ${p1.name}</div>
         <div class="rb-val">${r1}</div>
-        <div class="rb-detail">d6(${r1d})+Def(${p1.defense})+Dunk(${p1.dunking})${streak1&&possession===1?' ÷'+Math.pow(2,streak1):''}</div>
+        <div class="rb-detail">d6(${r1d})+Def(${p1.defense})+Dunk(${p1.dunking})</div>
       </div>
     </div>
-    <div class="outcome neutral pop" style="margin-top:4px;">${players[winner].name} grabs the board! 🏀</div>
-  `);
-  setActions([{ label:'▶ Next Possession', cls:'btn-primary', fn: startPossession }]);
+    <div class="outcome neutral pop" style="margin-top:4px;">${players[winner].name} grabs the board! 🏀</div>`);
+  setActions([{label:'▶ Next Possession', cls:'btn-primary', fn:startPossession}]);
 }
 
 // ══════════════════════════════════════════════════════
@@ -1327,18 +1258,16 @@ function rollRebound() {
 // ══════════════════════════════════════════════════════
 
 function endGame(winIdx) {
-  const w = players[winIdx], l = players[1 - winIdx];
-  const avEl = document.getElementById('win-avatar');
+  const w=players[winIdx], l=players[1-winIdx];
+  const avEl=document.getElementById('win-avatar');
   avEl.innerHTML = w.avatar
-    ? `<img src="${w.avatar}" style="width:100%;height:100%;object-fit:cover;"/>`
-    : '🏀';
-  document.getElementById('win-name').textContent = `${w.name} Wins!`;
-  document.getElementById('win-sub').textContent  =
-    [w.body, w.special !== 'None' ? '⭐ '+w.special : null].filter(Boolean).join(' · ');
-  document.getElementById('final-scores').innerHTML = `
+    ?`<img src="${w.avatar}" style="width:100%;height:100%;object-fit:cover;"/>`:'🏀';
+  document.getElementById('win-name').textContent=`${w.name} Wins!`;
+  document.getElementById('win-sub').textContent=
+    [w.body, w.special!=='None'?'⭐ '+w.special:null].filter(Boolean).join(' · ');
+  document.getElementById('final-scores').innerHTML=`
     <div class="fsbox"><div class="fsname">${w.name}</div><div class="fsval" style="color:${P_COLORS[winIdx]}">${w.score}</div></div>
-    <div class="fsbox"><div class="fsname">${l.name}</div><div class="fsval" style="color:${P_COLORS[1-winIdx]}">${l.score}</div></div>
-  `;
+    <div class="fsbox"><div class="fsname">${l.name}</div><div class="fsval" style="color:${P_COLORS[1-winIdx]}">${l.score}</div></div>`;
   showScreen('winscreen');
 }
 
@@ -1352,16 +1281,15 @@ function confirmNew() {
 
 function rematch() {
   if (!lastSetup) { showScreen('home'); return; }
-  players.forEach(p => p.score = 0);
-  offRebStreak = [0, 0];
-  possession = 0;
-  document.getElementById('log-wrap').innerHTML = '<h4>📋 Play-by-Play</h4>';
+  players.forEach(p=>p.score=0);
+  offRebStreak=[0,0];
+  possession=0;
+  document.getElementById('log-wrap').innerHTML='<h4>📋 Play-by-Play</h4>';
   updateScoreboard();
   showScreen('game');
   doJumpBall();
 }
 
-// Init
 window.addEventListener('load', () => {
   initAccessories();
   updatePreview(1);
