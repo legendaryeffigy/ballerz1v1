@@ -10,7 +10,7 @@
     :root {
       --bg:      #0a0a0a;
       --surface: #141414;
-      --card:    #1a1a1a;
+      --card:    rgba(22,22,22,0.93);
       --border:  #2a2a2a;
       --orange:  #ff6d00;
       --green:   #00e676;
@@ -21,24 +21,56 @@
       --purple:  #d500f9;
       --cyan:    #00e5ff;
       --white:   #f0f0f0;
-      --dim:     #555;
+      --dim:     #666;
     }
 
     body {
-      background: var(--bg);
+      background-color: var(--bg);
+      background-image: url('court.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
       color: var(--white);
       font-family: 'Segoe UI', sans-serif;
       min-height: 100vh;
     }
 
-    .screen { display: none; flex-direction: column; align-items: center; padding: 28px 16px; width: 100%; }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.82);
+      z-index: 0; pointer-events: none;
+    }
+
+    .screen {
+      display: none; flex-direction: column;
+      align-items: center; padding: 28px 16px;
+      width: 100%; position: relative; z-index: 1;
+    }
     .screen.active { display: flex; }
 
-    /* ── BALLERZ LOGO SVG ── */
-    .ballerz-logo-wrap { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-    .ballerz-logo-wrap .brand-name {
-      font-size: 1.5rem; font-weight: 900; letter-spacing: 4px;
-      color: var(--white); text-transform: uppercase;
+    /* ── Music Player ── */
+    .music-bar {
+      position: fixed; bottom: 16px; right: 16px;
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(20,20,20,.92); border: 1px solid var(--border);
+      border-radius: 30px; padding: 8px 14px;
+      z-index: 100; backdrop-filter: blur(10px);
+    }
+    .music-btn {
+      background: none; border: none; cursor: pointer;
+      color: var(--white); font-size: 1rem; padding: 0;
+      display: flex; align-items: center;
+    }
+    .music-btn:hover { color: var(--orange); }
+    .music-track {
+      font-size: .68rem; color: var(--dim);
+      max-width: 100px; white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis;
+    }
+    .music-vol {
+      width: 60px; accent-color: var(--orange);
+      cursor: pointer;
     }
 
     /* ── Buttons ── */
@@ -48,131 +80,123 @@
       font-size: .95rem; font-weight: 700; transition: all .15s; gap: 7px;
     }
     .btn-primary  { background: var(--orange); color: #000; }
-    .btn-primary:hover  { background: #ff8c00; transform: translateY(-1px); }
-    .btn-secondary { background: var(--card); color: var(--white); border: 1px solid var(--border); }
+    .btn-primary:hover { background: #ff8c00; transform: translateY(-1px); }
+    .btn-secondary { background: rgba(28,28,28,.95); color: var(--white); border: 1px solid var(--border); }
     .btn-secondary:hover { border-color: var(--orange); color: var(--orange); }
-    .btn:disabled  { opacity:.35; cursor:not-allowed; transform:none !important; }
+    .btn:disabled { opacity:.35; cursor:not-allowed; transform:none !important; }
     .btn-lg { font-size: 1.05rem; padding: 14px 36px; }
     .btn-sm { font-size: .8rem; padding: 8px 16px; }
 
-    /* ── HOME ── */
-    #home { gap: 0; justify-content: center; min-height: 100vh; }
+    /* ══════════════════
+       HOME
+    ══════════════════ */
+    #home { justify-content: center; min-height: 100vh; gap: 0; }
     .home-hero {
       display: flex; flex-direction: column; align-items: center;
-      gap: 20px; padding: 40px 20px;
-      text-align: center;
+      gap: 22px; padding: 40px 20px; text-align: center;
+      width: 100%; max-width: 520px;
     }
-    .home-tagline { color: var(--dim); font-size: .9rem; letter-spacing: 1px; text-transform: uppercase; }
-
-    .shot-ref {
-      width: 100%; border-collapse: collapse; font-size: .78rem;
-      max-width: 480px;
+    .home-logo img {
+      width: 110px; height: auto;
+      filter: drop-shadow(0 4px 24px rgba(0,0,0,.7));
     }
+    .home-title {
+      font-size: 2.2rem; font-weight: 900; letter-spacing: 4px;
+      text-transform: uppercase; color: var(--white);
+      text-shadow: 0 2px 12px rgba(0,0,0,.8);
+    }
+    .home-title span { color: var(--orange); }
+    .home-tagline {
+      font-size: .8rem; color: var(--dim);
+      letter-spacing: 2px; text-transform: uppercase;
+      margin-top: -14px;
+    }
+    .shot-ref { width: 100%; border-collapse: collapse; font-size: .78rem; }
     .shot-ref th {
       text-align: left; padding: 7px 10px; color: var(--dim);
       font-size: .68rem; text-transform: uppercase; letter-spacing: .5px;
       border-bottom: 1px solid var(--border); font-weight: 600;
     }
     .shot-ref td { padding: 7px 10px; border-bottom: 1px solid rgba(255,255,255,.03); }
+    .rules-pills { display: flex; flex-direction: column; gap: 7px; width: 100%; }
+    .rule-pill { font-size: .8rem; padding: 9px 14px; border-radius: 8px; color: var(--dim); }
 
-    .rules-pills { display: flex; flex-direction: column; gap: 7px; max-width: 480px; width: 100%; }
-    .rule-pill {
-      font-size: .8rem; padding: 9px 14px;
-      border-radius: 8px; color: var(--dim);
+    /* ══════════════════
+       SETUP
+    ══════════════════ */
+    #setup { max-width: 1000px; margin: 0 auto; }
+    .setup-top {
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;
     }
-
-    /* ── SETUP ── */
-    #setup { max-width: 980px; margin: 0 auto; gap: 0; }
-    .setup-header { text-align: center; margin-bottom: 24px; }
-    .setup-header p { color: var(--dim); font-size: .85rem; margin-top: 6px; }
+    .setup-top-logo { display: flex; align-items: center; gap: 10px; }
+    .setup-top-logo img { width: 40px; height: auto; }
+    .setup-top-logo span { font-size: 1.2rem; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; }
+    .finder-link { font-size: .8rem; color: var(--dim); }
+    .finder-link a { color: var(--orange); text-decoration: none; }
+    .finder-link a:hover { text-decoration: underline; }
 
     .setup-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-      width: 100%;
-      margin-bottom: 22px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 18px; width: 100%; margin-bottom: 22px;
     }
-
     .player-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 22px;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 22px; backdrop-filter: blur(12px);
     }
     .player-card.p1 { border-top: 3px solid var(--orange); }
     .player-card.p2 { border-top: 3px solid var(--blue2); }
 
-    .card-header {
-      display: flex; align-items: center; gap: 14px;
-      margin-bottom: 18px;
-    }
-
-    /* Avatar upload */
+    .card-header { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
     .avatar-upload {
-      width: 64px; height: 64px; border-radius: 12px;
-      background: var(--surface); border: 2px dashed var(--border);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      cursor: pointer; overflow: hidden; flex-shrink: 0;
-      transition: border-color .2s;
-      position: relative;
+      width: 66px; height: 66px; border-radius: 12px;
+      background: rgba(255,255,255,.04); border: 2px dashed var(--border);
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; cursor: pointer; overflow: hidden;
+      flex-shrink: 0; transition: border-color .2s; position: relative;
     }
     .avatar-upload:hover { border-color: var(--orange); }
-    .avatar-upload img {
-      width: 100%; height: 100%; object-fit: cover;
-      position: absolute; inset: 0;
-    }
+    .avatar-upload img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
     .avatar-upload .upload-hint {
-      font-size: .6rem; color: var(--dim); text-align: center;
-      line-height: 1.3; padding: 4px; z-index: 1;
+      font-size: .58rem; color: var(--dim); text-align: center;
+      line-height: 1.4; padding: 4px; z-index: 1;
     }
     .avatar-upload input[type=file] {
-      position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+      position: absolute; inset: 0; opacity: 0; cursor: pointer;
     }
-
     .card-title h3 { font-size: 1rem; font-weight: 800; }
-    .card-title p  { font-size: .72rem; color: var(--dim); margin-top: 2px; }
+    .card-title p  { font-size: .7rem; color: var(--dim); margin-top: 2px; }
 
-    .field { margin-bottom: 11px; }
+    .field { margin-bottom: 10px; }
     .field label {
       display: block; font-size: .68rem; color: var(--dim);
       text-transform: uppercase; letter-spacing: .6px; margin-bottom: 4px;
     }
     .field input, .field select {
       width: 100%; padding: 8px 11px;
-      background: var(--surface); border: 1px solid var(--border);
+      background: rgba(255,255,255,.05); border: 1px solid var(--border);
       border-radius: 8px; color: var(--white); font-size: .88rem;
     }
     .field input:focus, .field select:focus { outline: none; border-color: var(--orange); }
 
     .section-label {
       font-size: .67rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 1px; color: var(--orange); margin: 13px 0 8px;
+      letter-spacing: 1px; color: var(--orange); margin: 12px 0 7px;
     }
-
-    .skills-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
-    }
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
     .skill-box { display: flex; flex-direction: column; gap: 4px; }
     .skill-box label { font-size: .67rem; color: var(--dim); text-transform: uppercase; letter-spacing: .4px; }
     .skill-box input {
       width: 100%; padding: 9px; text-align: center;
-      background: var(--surface); border: 1px solid var(--border);
+      background: rgba(255,255,255,.05); border: 1px solid var(--border);
       border-radius: 8px; color: var(--white);
       font-size: 1.05rem; font-weight: 800;
     }
     .skill-box input:focus { outline: none; border-color: var(--orange); }
 
-    /* Stat preview */
     .stat-preview {
-      margin-top: 14px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 12px;
+      margin-top: 14px; background: rgba(255,255,255,.03);
+      border: 1px solid var(--border); border-radius: 10px; padding: 12px;
     }
     .stat-preview-title {
       font-size: .67rem; color: var(--dim); text-transform: uppercase;
@@ -181,31 +205,31 @@
     .stat-bars { display: flex; flex-direction: column; gap: 7px; }
     .stat-bar-row { display: flex; align-items: center; gap: 8px; }
     .stat-bar-label { font-size: .68rem; color: var(--dim); width: 76px; flex-shrink: 0; }
-    .stat-bar-track {
-      flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden;
-    }
-    .stat-bar-fill { height: 100%; border-radius: 3px; transition: width .3s; }
-    .stat-bar-val { font-size: .72rem; font-weight: 700; width: 28px; text-align: right; flex-shrink: 0; }
+    .stat-bar-track { flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+    .stat-bar-fill  { height: 100%; border-radius: 3px; transition: width .3s; }
+    .stat-bar-val   { font-size: .72rem; font-weight: 700; width: 28px; text-align: right; flex-shrink: 0; }
 
-    /* ── GAME ── */
+    /* ══════════════════
+       GAME
+    ══════════════════ */
     #game { max-width: 900px; margin: 0 auto; gap: 0; padding: 16px; }
-
     .game-header {
       display: flex; align-items: center; justify-content: space-between;
       width: 100%; margin-bottom: 16px;
     }
+    .game-header-logo { display: flex; align-items: center; gap: 8px; }
+    .game-header-logo img { width: 30px; height: auto; }
+    .game-header-logo span { font-weight: 900; letter-spacing: 2px; font-size: .9rem; text-transform: uppercase; }
 
-    /* Scoreboard */
     .scoreboard {
       display: grid; grid-template-columns: 1fr auto 1fr;
       gap: 10px; width: 100%; align-items: center; margin-bottom: 14px;
     }
-
     .score-panel {
       background: var(--card); border: 1px solid var(--border);
       border-radius: 14px; padding: 16px;
       transition: box-shadow .2s, border-color .2s;
-      position: relative; overflow: hidden;
+      position: relative; overflow: hidden; backdrop-filter: blur(10px);
     }
     .score-panel::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
@@ -217,20 +241,18 @@
 
     .score-inner { display: flex; gap: 12px; align-items: flex-start; }
     .score-avatar {
-      width: 52px; height: 52px; border-radius: 10px;
+      width: 50px; height: 50px; border-radius: 10px;
       background: var(--surface); border: 1px solid var(--border);
       overflow: hidden; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem;
+      display: flex; align-items: center; justify-content: center; font-size: 1.4rem;
     }
     .score-avatar img { width: 100%; height: 100%; object-fit: cover; }
     .score-info { flex: 1; min-width: 0; }
     .pname  { font-weight: 700; font-size: .9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .psub   { font-size: .68rem; color: var(--dim); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .psub   { font-size: .66rem; color: var(--dim); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .pscore { font-size: 2.8rem; font-weight: 900; line-height: 1; margin-top: 4px; }
     .p1score { color: var(--orange); }
     .p2score { color: var(--blue2); }
-
     .skill-pills { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
     .pill {
       font-size: .62rem; padding: 2px 7px; border-radius: 20px;
@@ -240,7 +262,6 @@
     .pill.shoot { color: var(--green);  border-color: rgba(0,230,118,.3);  background: rgba(0,230,118,.06); }
     .pill.play  { color: var(--cyan);   border-color: rgba(0,229,255,.3);  background: rgba(0,229,255,.06); }
     .pill.def   { color: var(--red);    border-color: rgba(255,23,68,.3);   background: rgba(255,23,68,.06); }
-
     .ball-badge {
       display: inline-flex; align-items: center; gap: 4px;
       font-size: .68rem; font-weight: 700; padding: 3px 9px;
@@ -248,17 +269,16 @@
     }
     .ball-badge.p1b { background: var(--orange); color: #000; }
     .ball-badge.p2b { background: var(--blue2);  color: #fff; }
-
     .vs-block     { text-align: center; }
     .vs-text      { font-size: 1.3rem; font-weight: 900; color: var(--dim); }
     .target-score { font-size: .72rem; color: var(--dim); margin-top: 3px; }
 
-    /* Court */
     .court {
       width: 100%; background: var(--card); border: 1px solid var(--border);
       border-radius: 14px; padding: 26px 22px; margin-bottom: 14px;
       min-height: 280px; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 16px; position: relative;
+      align-items: center; justify-content: center;
+      gap: 16px; position: relative; backdrop-filter: blur(10px);
     }
     .court-label {
       position: absolute; top: 13px; left: 16px;
@@ -267,26 +287,25 @@
     }
     .phase-title { font-size: 1.15rem; font-weight: 800; text-align: center; }
 
-    /* Shot card */
     .shot-card {
-      background: var(--surface); border: 2px solid var(--border);
+      background: rgba(255,255,255,.04); border: 2px solid var(--border);
       border-radius: 14px; padding: 16px 28px; text-align: center; min-width: 220px;
     }
-    .shot-icon { font-size: 2.8rem; line-height: 1; margin-bottom: 5px; }
-    .shot-name { font-size: 1.2rem; font-weight: 900; }
-    .shot-meta { font-size: .78rem; color: var(--dim); margin-top: 4px; }
-    .shot-skill{ font-size: .75rem; font-weight: 600; margin-top: 3px; }
+    .shot-icon  { font-size: 2.8rem; line-height: 1; margin-bottom: 5px; }
+    .shot-name  { font-size: 1.2rem; font-weight: 900; }
+    .shot-meta  { font-size: .78rem; color: var(--dim); margin-top: 4px; }
+    .shot-skill { font-size: .75rem; font-weight: 600; margin-top: 3px; }
 
-    /* Dice */
     .dice-row { display: flex; gap: 10px; justify-content: center; align-items: center; flex-wrap: wrap; }
     .die {
-      width: 52px; height: 52px; background: var(--white); border-radius: 10px;
+      width: 54px; height: 54px; background: var(--white); border-radius: 10px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 2rem; color: #000; font-weight: 900;
+      font-size: 2.1rem; color: #000; font-weight: 900;
       box-shadow: 0 4px 14px rgba(0,0,0,.5);
     }
-    .die.doubles { background: var(--red); color: #fff; box-shadow: 0 0 18px rgba(255,23,68,.5); }
-    .die.roll-anim { animation: droll .35s ease; }
+    .die.dunk-roll   { background: var(--purple); color: #fff; box-shadow: 0 0 18px rgba(213,0,249,.5); }
+    .die.logo-roll   { background: var(--yellow); color: #000; box-shadow: 0 0 18px rgba(255,214,0,.5); }
+    .die.roll-anim   { animation: droll .35s ease; }
     @keyframes droll {
       0%  { transform: rotate(0) scale(1); }
       30% { transform: rotate(18deg) scale(1.15); }
@@ -295,10 +314,9 @@
     }
     .dice-total { font-size: 2rem; font-weight: 900; color: var(--orange); min-width: 32px; text-align: center; }
 
-    /* Result */
     .result-row { display: flex; gap: 12px; align-items: center; justify-content: center; flex-wrap: wrap; }
     .result-box {
-      background: var(--surface); border: 1px solid var(--border);
+      background: rgba(255,255,255,.04); border: 1px solid var(--border);
       border-radius: 12px; padding: 13px 20px; text-align: center; min-width: 120px;
     }
     .result-box .rb-label  { font-size: .68rem; color: var(--dim); text-transform: uppercase; letter-spacing: .4px; margin-bottom: 4px; }
@@ -312,24 +330,24 @@
 
     .outcome { font-size: 1.4rem; font-weight: 900; text-align: center; }
     .outcome.made    { color: var(--green); }
+    .outcome.missed  { color: var(--red); }
     .outcome.blocked { color: var(--red); }
     .outcome.info    { color: var(--yellow); }
     .outcome.neutral { color: var(--cyan); }
 
     .doubles-badge {
       display: inline-flex; align-items: center; gap: 6px;
-      background: var(--red); color: #fff;
-      font-size: .82rem; font-weight: 800;
-      padding: 6px 14px; border-radius: 20px;
-      box-shadow: 0 0 16px rgba(255,23,68,.4);
+      font-size: .82rem; font-weight: 800; padding: 6px 14px;
+      border-radius: 20px;
     }
+    .doubles-badge.dunk { background: var(--purple); color: #fff; box-shadow: 0 0 16px rgba(213,0,249,.4); }
+    .doubles-badge.logo { background: var(--yellow); color: #000; box-shadow: 0 0 16px rgba(255,214,0,.4); }
 
     .action-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 4px; }
 
-    /* Log */
     .log-wrap {
       width: 100%; background: var(--card); border: 1px solid var(--border);
-      border-radius: 12px; padding: 12px 14px;
+      border-radius: 12px; padding: 12px 14px; backdrop-filter: blur(10px);
       max-height: 140px; overflow-y: auto;
       display: flex; flex-direction: column; gap: 3px;
     }
@@ -340,28 +358,29 @@
     .log-line.info  { color: var(--yellow); border-color: var(--yellow); }
     .log-line.event { color: var(--cyan);   border-color: var(--cyan); }
 
-    /* Win */
+    /* ══════════════════
+       WIN
+    ══════════════════ */
     #winscreen { text-align: center; gap: 14px; justify-content: center; min-height: 100vh; }
     .trophy { font-size: 4.5rem; }
     .win-avatar {
       width: 90px; height: 90px; border-radius: 18px;
       overflow: hidden; border: 3px solid var(--orange);
       display: flex; align-items: center; justify-content: center;
-      font-size: 2.5rem; background: var(--card);
-      margin: 0 auto;
+      font-size: 2.5rem; background: var(--card); margin: 0 auto;
     }
     .win-avatar img { width: 100%; height: 100%; object-fit: cover; }
-    .win-name  { font-size: 2.2rem; font-weight: 900; color: var(--orange); }
-    .win-sub   { color: var(--dim); font-size: .9rem; }
+    .win-name { font-size: 2.2rem; font-weight: 900; color: var(--orange); }
+    .win-sub  { color: var(--dim); font-size: .9rem; }
     .final-scores { display: flex; gap: 16px; margin-top: 6px; justify-content: center; }
     .fsbox {
       background: var(--card); border: 1px solid var(--border);
       border-radius: 12px; padding: 16px 28px; text-align: center;
+      backdrop-filter: blur(10px);
     }
     .fsbox .fsname { font-size: .82rem; color: var(--dim); margin-bottom: 4px; }
     .fsbox .fsval  { font-size: 2rem; font-weight: 900; }
 
-    /* Animations */
     @keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
     .fade { animation: fadeUp .22s ease forwards; }
     @keyframes pop { 0%,100%{transform:scale(1)} 50%{transform:scale(1.12)} }
@@ -369,7 +388,6 @@
 
     @media (max-width: 620px) {
       .setup-grid { grid-template-columns: 1fr; }
-      .scoreboard { grid-template-columns: 1fr auto 1fr; }
       .pscore { font-size: 2rem; }
       .score-avatar { width: 40px; height: 40px; }
     }
@@ -377,68 +395,48 @@
 </head>
 <body>
 
-<!-- ══════════════════════════════════════
+<!-- ── Music Player ── -->
+<div class="music-bar" id="music-bar">
+  <button class="music-btn" id="music-toggle" onclick="toggleMusic()" title="Play/Pause">▶</button>
+  <button class="music-btn" onclick="nextTrack()" title="Next track">⏭</button>
+  <span class="music-track" id="music-track-name">—</span>
+  <input type="range" class="music-vol" id="music-vol" min="0" max="1" step="0.05" value="0.5" oninput="setVolume(this.value)"/>
+</div>
+
+<!-- ══════════════════════════════════
      HOME
-══════════════════════════════════════ -->
+══════════════════════════════════ -->
 <div id="home" class="screen active">
   <div class="home-hero">
-
-    <!-- Ballerz Logo -->
-    <div class="ballerz-logo-wrap">
-      <svg width="90" height="90" viewBox="0 0 100 120" xmlns="[w3.org](http://www.w3.org/2000/svg)">
-        <defs>
-          <clipPath id="logoClip">
-            <rect x="0" y="0" width="100" height="100" rx="18" ry="18"/>
-          </clipPath>
-        </defs>
-        <!-- Blue left half -->
-        <rect x="0" y="0" width="100" height="100" rx="18" fill="#1565c0"/>
-        <!-- Red right half -->
-        <polygon points="50,0 100,0 100,100 50,100" fill="#d32f2f" clip-path="url(#logoClip)"/>
-        <!-- Gloss -->
-        <ellipse cx="36" cy="22" rx="24" ry="14" fill="rgba(255,255,255,.15)"/>
-        <!-- Pixel figure - head -->
-        <rect x="36" y="10" width="8"  height="4"  fill="white"/>
-        <rect x="32" y="14" width="16" height="4"  fill="white"/>
-        <rect x="32" y="18" width="16" height="4"  fill="white"/>
-        <rect x="32" y="22" width="16" height="4"  fill="white"/>
-        <!-- neck -->
-        <rect x="38" y="26" width="8"  height="4"  fill="white"/>
-        <!-- shoulders / torso -->
-        <rect x="28" y="30" width="44" height="4"  fill="white"/>
-        <rect x="28" y="34" width="44" height="4"  fill="white"/>
-        <rect x="28" y="38" width="44" height="4"  fill="white"/>
-        <rect x="28" y="42" width="44" height="4"  fill="white"/>
-        <!-- lower body -->
-        <rect x="32" y="46" width="36" height="4"  fill="white"/>
-        <rect x="32" y="50" width="36" height="4"  fill="white"/>
-        <rect x="32" y="54" width="36" height="20" fill="white"/>
-      </svg>
-      <div class="brand-name">Ballerz</div>
-      <div class="home-tagline">Street Run · 1v1</div>
+    <div class="home-logo">
+      <img src="logo.png" alt="Ballerz"/>
     </div>
+    <div class="home-title">Street <span>Run</span></div>
+    <div class="home-tagline">1v1 · Real NFT Skills · Street Rules</div>
 
-    <!-- Shot table -->
     <table class="shot-ref">
       <thead>
-        <tr><th>2d6</th><th>Shot</th><th>Pts</th><th>Skill</th></tr>
+        <tr><th>2d6 Roll</th><th>Shot</th><th>Pts</th><th>Skill</th></tr>
       </thead>
       <tbody>
-        <tr><td><strong>2</strong></td><td>🔥 Slam Dunk</td><td style="color:var(--purple);font-weight:800;">2</td><td style="color:var(--purple);">Dunking</td></tr>
-        <tr><td>3–4</td><td>🏃 Layup</td><td>1</td><td style="color:var(--purple);">Dunking</td></tr>
-        <tr><td>5–7</td><td>🎯 Mid Range</td><td>2</td><td style="color:var(--green);">Shooting</td></tr>
+        <tr><td><strong style="color:var(--yellow);">6+6</strong></td><td>⚡ Logo Shot</td><td style="color:var(--yellow);font-weight:800;">4</td><td style="color:var(--green);">Shooting</td></tr>
+        <tr><td><strong style="color:var(--purple);">Doubles*</strong></td><td>🔥 Slam Dunk</td><td style="color:var(--purple);font-weight:800;">2</td><td style="color:var(--purple);">Dunking</td></tr>
+        <tr><td>2–7</td><td>🏃 Layup</td><td>1</td><td style="color:var(--purple);">Dunking</td></tr>
         <tr><td>8–9</td><td>💪 Deep Two</td><td>2</td><td style="color:var(--green);">Shooting</td></tr>
         <tr><td>10–11</td><td>🏹 Three Pointer</td><td>3</td><td style="color:var(--green);">Shooting</td></tr>
-        <tr><td><strong>12</strong></td><td>⚡ Logo Shot</td><td style="color:var(--yellow);font-weight:800;">4</td><td style="color:var(--green);">Shooting</td></tr>
       </tbody>
     </table>
+    <div style="font-size:.72rem;color:var(--dim);margin-top:-10px;text-align:left;width:100%;">* Any doubles except 6+6</div>
 
     <div class="rules-pills">
       <div class="rule-pill" style="background:rgba(255,23,68,.07);border:1px solid rgba(255,23,68,.2);">
         🛡 <strong style="color:var(--white);">Block:</strong> Defender rolls 2d6 — doubles stops the shot
       </div>
+      <div class="rule-pill" style="background:rgba(0,230,118,.07);border:1px solid rgba(0,230,118,.2);">
+        🎯 <strong style="color:var(--white);">Make it:</strong> Roll d6 + skill vs threshold — miss triggers rebound
+      </div>
       <div class="rule-pill" style="background:rgba(0,229,255,.07);border:1px solid rgba(0,229,255,.2);">
-        🔄 <strong style="color:var(--white);">Rebound:</strong> Both roll d6 + Defense + Dunking — higher wins · Ties go to offense
+        🔄 <strong style="color:var(--white);">Rebound:</strong> d6 + Defense + Dunking — consecutive off-boards penalized
       </div>
     </div>
 
@@ -446,42 +444,32 @@
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
+<!-- ══════════════════════════════════
      SETUP
-══════════════════════════════════════ -->
+══════════════════════════════════ -->
 <div id="setup" class="screen">
-  <div class="setup-header">
-    <!-- Mini logo -->
-    <div style="display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:6px;">
-      <svg width="36" height="36" viewBox="0 0 100 100" xmlns="[w3.org](http://www.w3.org/2000/svg)">
-        <rect x="0" y="0" width="100" height="100" rx="18" fill="#1565c0"/>
-        <polygon points="50,0 100,0 100,100 50,100" fill="#d32f2f"/>
-        <rect x="36" y="10" width="8"  height="4" fill="white"/>
-        <rect x="32" y="14" width="16" height="4" fill="white"/>
-        <rect x="32" y="18" width="16" height="4" fill="white"/>
-        <rect x="38" y="22" width="8"  height="4" fill="white"/>
-        <rect x="28" y="26" width="44" height="4" fill="white"/>
-        <rect x="28" y="30" width="44" height="4" fill="white"/>
-        <rect x="28" y="34" width="44" height="4" fill="white"/>
-        <rect x="32" y="38" width="36" height="20" fill="white"/>
-      </svg>
-      <span style="font-size:1.4rem;font-weight:900;letter-spacing:3px;">BALLERZ</span>
+  <div class="setup-top">
+    <div class="setup-top-logo">
+      <img src="logo.png" alt="Ballerz"/>
+      <span>Ballerz</span>
     </div>
-    <p>Enter your NFT stats from <a href="[ballerz.pro](https://ballerz.pro/finder)" target="_blank" style="color:var(--orange);">ballerz.pro/finder</a></p>
+    <div class="finder-link">
+      Look up your NFT at <a href="[ballerz-com-git-develop-ballerz.vercel.app](https://ballerz-com-git-develop-ballerz.vercel.app/ballerz)" target="_blank">ballerz.pro/finder</a>
+    </div>
   </div>
 
   <div class="setup-grid">
-    <!-- ── PLAYER 1 ── -->
+    <!-- PLAYER 1 -->
     <div class="player-card p1">
       <div class="card-header">
-        <div class="avatar-upload" id="av1-wrap" onclick="document.getElementById('av1-input').click()">
+        <div class="avatar-upload" onclick="document.getElementById('av1-input').click()">
           <img id="av1-img" src="" style="display:none;"/>
-          <div class="upload-hint" id="av1-hint">📸<br/>NFT<br/>Photo</div>
-          <input type="file" id="av1-input" accept="image/*" onchange="loadAvatar(event,'av1')"/>
+          <div class="upload-hint" id="av1-hint">📸<br/>NFT</div>
+          <input type="file" id="av1-input" accept="image/*" onchange="loadAvatar(event,1)"/>
         </div>
         <div class="card-title">
           <h3 style="color:var(--orange);">🟠 Player 1</h3>
-          <p>Tap photo to upload NFT image</p>
+          <p>Tap to upload NFT image</p>
         </div>
       </div>
 
@@ -492,7 +480,7 @@
       <div class="field">
         <label>Body Type</label>
         <select id="p1-body" onchange="updatePreview(1)">
-          <option value="">— None / Unknown —</option>
+          <option value="">— None —</option>
           <option>Alien</option><option>Bright Pink Alien</option><option>Bright Zombie</option>
           <option>Devil</option><option>Emoji</option><option>Human I</option>
           <option>Human II</option><option>Human III</option><option>Human IV</option>
@@ -500,66 +488,61 @@
           <option>Stone</option><option>Zombie</option>
         </select>
       </div>
+
+      <div class="section-label">Accessories (up to 3)</div>
       <div class="field">
-        <label>Accessory</label>
-        <select id="p1-acc" onchange="updatePreview(1)">
-          <option value="">— None / Unknown —</option>
-          <option>3D Glasses</option><option>Armband</option><option>Arm Tattoo</option>
-          <option>Clock Necklace</option><option>Cyborg Eye</option><option>Earrings</option>
-          <option>Eye Patch</option><option>Glasses</option><option>Goggles</option>
-          <option>Gold Chain</option><option>Gold Headphones</option><option>Grey Headphones</option>
-          <option>Headband</option><option>Nasal Strip</option><option>None</option>
-          <option>Pencil</option><option>Red Headphones</option><option>Silver Chain</option>
-          <option>Space Visor</option><option>Steampunk Goggles</option>
+        <label>Accessory 1</label>
+        <select id="p1-acc1" onchange="filterAccessories(1);updatePreview(1)">
+          <option value="">— None —</option>
         </select>
       </div>
+      <div class="field">
+        <label>Accessory 2</label>
+        <select id="p1-acc2" onchange="filterAccessories(1);updatePreview(1)">
+          <option value="">— None —</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Accessory 3</label>
+        <select id="p1-acc3" onchange="updatePreview(1)">
+          <option value="">— None —</option>
+        </select>
+      </div>
+
       <div class="field">
         <label>Special (Face Trait)</label>
         <select id="p1-special" onchange="updatePreview(1)">
           <option value="None">None</option>
           <option value="Gold Grillz">Gold Grillz ⭐</option>
-          <option value="Tongue Out">Tongue Out 🌟 (+3.00 OVR)</option>
+          <option value="Tongue Out">Tongue Out 🌟</option>
         </select>
       </div>
 
-      <div class="section-label">Base Skill Ranks (from NFT · 60–99)</div>
+      <div class="section-label">Base Skill Ranks (60–99)</div>
       <div class="skills-grid">
-        <div class="skill-box">
-          <label>🏀 Dunking</label>
-          <input type="number" id="p1-dunking" value="75" min="60" max="99" oninput="updatePreview(1)"/>
-        </div>
-        <div class="skill-box">
-          <label>🎯 Shooting</label>
-          <input type="number" id="p1-shooting" value="75" min="60" max="99" oninput="updatePreview(1)"/>
-        </div>
-        <div class="skill-box">
-          <label>🎮 Playmaking</label>
-          <input type="number" id="p1-playmaking" value="75" min="60" max="99" oninput="updatePreview(1)"/>
-        </div>
-        <div class="skill-box">
-          <label>🛡 Defense</label>
-          <input type="number" id="p1-defense" value="75" min="60" max="99" oninput="updatePreview(1)"/>
-        </div>
+        <div class="skill-box"><label>🏀 Dunking</label>   <input type="number" id="p1-dunking"    value="75" min="60" max="99" oninput="updatePreview(1)"/></div>
+        <div class="skill-box"><label>🎯 Shooting</label>  <input type="number" id="p1-shooting"   value="75" min="60" max="99" oninput="updatePreview(1)"/></div>
+        <div class="skill-box"><label>🎮 Playmaking</label><input type="number" id="p1-playmaking" value="75" min="60" max="99" oninput="updatePreview(1)"/></div>
+        <div class="skill-box"><label>🛡 Defense</label>   <input type="number" id="p1-defense"    value="75" min="60" max="99" oninput="updatePreview(1)"/></div>
       </div>
 
-      <!-- Live stat preview -->
-      <div class="stat-preview" id="p1-preview">
-        <div class="stat-preview-title">⚡ Final Game Stats (with bonuses)</div>
+      <div class="stat-preview">
+        <div class="stat-preview-title">⚡ Final Stats (with bonuses)</div>
         <div class="stat-bars" id="p1-bars"></div>
       </div>
     </div>
 
-    <!-- ── PLAYER 2 ── -->
+    <!-- PLAYER 2 -->
     <div class="player-card p2">
       <div class="card-header">
-        <div class="avatar-upload" id="av2-wrap" onclick="document.getElementById('av2-input').click()">
+        <div class="avatar-upload" onclick="document.getElementById('av2-input').click()">
           <img id="av2-img" src="" style="display:none;"/>
-          <div class="upload-hint" id="av2-hint">📸<br/>NFT<br/>Photo</div>
-          <input type="file" id="av2-input" accept="image/*" onchange="loadAvatar(event,'av2')"/>
+          <div class="upload-hint" id="av2-hint">📸<br/>NFT</div>
+          <input type="file" id="av2-input" accept="image/*" onchange="loadAvatar(event,2)"/>
         </div>
         <div class="card-title">
           <h3 style="color:var(--blue2);">🔵 Player 2</h3>
-          <p>Tap photo to upload NFT image</p>
+          <p>Tap to upload NFT image</p>
         </div>
       </div>
 
@@ -570,7 +553,7 @@
       <div class="field">
         <label>Body Type</label>
         <select id="p2-body" onchange="updatePreview(2)">
-          <option value="">— None / Unknown —</option>
+          <option value="">— None —</option>
           <option>Alien</option><option>Bright Pink Alien</option><option>Bright Zombie</option>
           <option>Devil</option><option>Emoji</option><option>Human I</option>
           <option>Human II</option><option>Human III</option><option>Human IV</option>
@@ -578,89 +561,76 @@
           <option>Stone</option><option>Zombie</option>
         </select>
       </div>
+
+      <div class="section-label">Accessories (up to 3)</div>
       <div class="field">
-        <label>Accessory</label>
-        <select id="p2-acc" onchange="updatePreview(2)">
-          <option value="">— None / Unknown —</option>
-          <option>3D Glasses</option><option>Armband</option><option>Arm Tattoo</option>
-          <option>Clock Necklace</option><option>Cyborg Eye</option><option>Earrings</option>
-          <option>Eye Patch</option><option>Glasses</option><option>Goggles</option>
-          <option>Gold Chain</option><option>Gold Headphones</option><option>Grey Headphones</option>
-          <option>Headband</option><option>Nasal Strip</option><option>None</option>
-          <option>Pencil</option><option>Red Headphones</option><option>Silver Chain</option>
-          <option>Space Visor</option><option>Steampunk Goggles</option>
+        <label>Accessory 1</label>
+        <select id="p2-acc1" onchange="filterAccessories(2);updatePreview(2)">
+          <option value="">— None —</option>
         </select>
       </div>
+      <div class="field">
+        <label>Accessory 2</label>
+        <select id="p2-acc2" onchange="filterAccessories(2);updatePreview(2)">
+          <option value="">— None —</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Accessory 3</label>
+        <select id="p2-acc3" onchange="updatePreview(2)">
+          <option value="">— None —</option>
+        </select>
+      </div>
+
       <div class="field">
         <label>Special (Face Trait)</label>
         <select id="p2-special" onchange="updatePreview(2)">
           <option value="None">None</option>
           <option value="Gold Grillz">Gold Grillz ⭐</option>
-          <option value="Tongue Out">Tongue Out 🌟 (+3.00 OVR)</option>
+          <option value="Tongue Out">Tongue Out 🌟</option>
         </select>
       </div>
 
-      <div class="section-label">Base Skill Ranks (from NFT · 60–99)</div>
+      <div class="section-label">Base Skill Ranks (60–99)</div>
       <div class="skills-grid">
-        <div class="skill-box">
-          <label>🏀 Dunking</label>
-          <input type="number" id="p2-dunking" value="75" min="60" max="99" oninput="updatePreview(2)"/>
-        </div>
-        <div class="skill-box">
-          <label>🎯 Shooting</label>
-          <input type="number" id="p2-shooting" value="75" min="60" max="99" oninput="updatePreview(2)"/>
-        </div>
-        <div class="skill-box">
-          <label>🎮 Playmaking</label>
-          <input type="number" id="p2-playmaking" value="75" min="60" max="99" oninput="updatePreview(2)"/>
-        </div>
-        <div class="skill-box">
-          <label>🛡 Defense</label>
-          <input type="number" id="p2-defense" value="75" min="60" max="99" oninput="updatePreview(2)"/>
-        </div>
+        <div class="skill-box"><label>🏀 Dunking</label>   <input type="number" id="p2-dunking"    value="75" min="60" max="99" oninput="updatePreview(2)"/></div>
+        <div class="skill-box"><label>🎯 Shooting</label>  <input type="number" id="p2-shooting"   value="75" min="60" max="99" oninput="updatePreview(2)"/></div>
+        <div class="skill-box"><label>🎮 Playmaking</label><input type="number" id="p2-playmaking" value="75" min="60" max="99" oninput="updatePreview(2)"/></div>
+        <div class="skill-box"><label>🛡 Defense</label>   <input type="number" id="p2-defense"    value="75" min="60" max="99" oninput="updatePreview(2)"/></div>
       </div>
 
-      <div class="stat-preview" id="p2-preview">
-        <div class="stat-preview-title">⚡ Final Game Stats (with bonuses)</div>
+      <div class="stat-preview">
+        <div class="stat-preview-title">⚡ Final Stats (with bonuses)</div>
         <div class="stat-bars" id="p2-bars"></div>
       </div>
     </div>
   </div>
 
-  <div style="display:flex;gap:12px;margin-bottom:40px;">
+  <div style="display:flex;gap:12px;margin-bottom:60px;">
     <button class="btn btn-secondary" onclick="showScreen('home')">← Back</button>
     <button class="btn btn-primary btn-lg" onclick="startGame()">🏀 Tip Off!</button>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
+<!-- ══════════════════════════════════
      GAME
-══════════════════════════════════════ -->
+══════════════════════════════════ -->
 <div id="game" class="screen">
   <div class="game-header">
-    <div style="display:flex;align-items:center;gap:8px;">
-      <svg width="28" height="28" viewBox="0 0 100 100" xmlns="[w3.org](http://www.w3.org/2000/svg)">
-        <rect x="0" y="0" width="100" height="100" rx="18" fill="#1565c0"/>
-        <polygon points="50,0 100,0 100,100 50,100" fill="#d32f2f"/>
-        <rect x="36" y="10" width="8" height="4" fill="white"/>
-        <rect x="32" y="14" width="16" height="8" fill="white"/>
-        <rect x="38" y="22" width="8" height="4" fill="white"/>
-        <rect x="28" y="26" width="44" height="12" fill="white"/>
-        <rect x="32" y="38" width="36" height="18" fill="white"/>
-      </svg>
-      <span style="font-weight:900;letter-spacing:2px;font-size:.95rem;">BALLERZ</span>
+    <div class="game-header-logo">
+      <img src="logo.png" alt="Ballerz"/>
+      <span>Ballerz</span>
     </div>
     <button class="btn btn-secondary btn-sm" onclick="confirmNew()">New Game</button>
   </div>
 
-  <!-- Scoreboard -->
   <div class="scoreboard">
     <div class="score-panel p1" id="sp1">
       <div class="score-inner">
         <div class="score-avatar" id="g-av1">🏀</div>
         <div class="score-info">
-          <div class="pname" id="g-p1-name">Player 1</div>
-          <div class="psub"  id="g-p1-sub">—</div>
+          <div class="pname"  id="g-p1-name">Player 1</div>
+          <div class="psub"   id="g-p1-sub">—</div>
           <div class="pscore p1score" id="g-p1-score">0</div>
         </div>
       </div>
@@ -677,8 +647,8 @@
       <div class="score-inner">
         <div class="score-avatar" id="g-av2">🏀</div>
         <div class="score-info">
-          <div class="pname" id="g-p2-name">Player 2</div>
-          <div class="psub"  id="g-p2-sub">—</div>
+          <div class="pname"  id="g-p2-name">Player 2</div>
+          <div class="psub"   id="g-p2-sub">—</div>
           <div class="pscore p2score" id="g-p2-score">0</div>
         </div>
       </div>
@@ -687,7 +657,6 @@
     </div>
   </div>
 
-  <!-- Court -->
   <div class="court" id="court">
     <div class="court-label" id="court-label">JUMP BALL</div>
     <div class="phase-title"  id="phase-title">Who gets first possession?</div>
@@ -695,15 +664,12 @@
     <div class="action-row" id="action-row"></div>
   </div>
 
-  <!-- Log -->
-  <div class="log-wrap" id="log-wrap">
-    <h4>📋 Play-by-Play</h4>
-  </div>
+  <div class="log-wrap" id="log-wrap"><h4>📋 Play-by-Play</h4></div>
 </div>
 
-<!-- ══════════════════════════════════════
+<!-- ══════════════════════════════════
      WIN
-══════════════════════════════════════ -->
+══════════════════════════════════ -->
 <div id="winscreen" class="screen">
   <div class="trophy">🏆</div>
   <div class="win-avatar" id="win-avatar">🏀</div>
@@ -718,7 +684,87 @@
 
 <script>
 // ══════════════════════════════════════════════════════
-//  NFT TRAIT DATA
+//  MUSIC
+// ══════════════════════════════════════════════════════
+
+const TRACKS = [
+  'track1.mp3','track2.mp3','track3.mp3',
+  'track4.mp3','track5.mp3','track6.mp3'
+];
+
+let audio        = new Audio();
+let trackQueue   = [];
+let currentTrack = -1;
+let musicStarted = false;
+
+function shuffleQueue() {
+  let arr = [...TRACKS];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  // Avoid same track repeating across shuffle boundaries
+  if (trackQueue.length && arr[0] === trackQueue[trackQueue.length - 1]) {
+    const swap = Math.floor(Math.random() * (arr.length - 1)) + 1;
+    [arr[0], arr[swap]] = [arr[swap], arr[0]];
+  }
+  trackQueue = arr;
+  currentTrack = 0;
+}
+
+function playNextTrack() {
+  if (currentTrack >= trackQueue.length || trackQueue.length === 0) shuffleQueue();
+  const track = trackQueue[currentTrack++];
+  audio.src = track;
+  audio.volume = parseFloat(document.getElementById('music-vol').value);
+  audio.play().catch(() => {});
+  document.getElementById('music-track-name').textContent =
+    track.replace('.mp3','').replace('track','Track ');
+  document.getElementById('music-toggle').textContent = '⏸';
+}
+
+audio.addEventListener('ended', playNextTrack);
+
+function startMusic() {
+  if (!musicStarted) {
+    musicStarted = true;
+    shuffleQueue();
+    playNextTrack();
+  }
+}
+
+function toggleMusic() {
+  if (audio.paused) {
+    if (!audio.src || audio.src === window.location.href) {
+      startMusic();
+    } else {
+      audio.play();
+      document.getElementById('music-toggle').textContent = '⏸';
+    }
+  } else {
+    audio.pause();
+    document.getElementById('music-toggle').textContent = '▶';
+  }
+}
+
+function nextTrack() {
+  audio.pause();
+  if (currentTrack >= trackQueue.length) shuffleQueue();
+  playNextTrack();
+}
+
+function setVolume(v) {
+  audio.volume = parseFloat(v);
+}
+
+// Auto-start on first user interaction
+document.addEventListener('click', function startOnce() {
+  startMusic();
+  document.removeEventListener('click', startOnce);
+}, { once: true });
+
+// ══════════════════════════════════════════════════════
+//  NFT DATA
 // ══════════════════════════════════════════════════════
 
 const BODY_TYPES = {
@@ -738,7 +784,13 @@ const BODY_TYPES = {
   "Zombie":            { Height:3,  Strength:5,  Speed:-5, Jumping:5  },
 };
 
-// Accessory raw stats — mapped to 4 skills below
+const ALL_ACCESSORIES = [
+  "3D Glasses","Armband","Arm Tattoo","Clock Necklace","Cyborg Eye",
+  "Earrings","Eye Patch","Glasses","Goggles","Gold Chain","Gold Headphones",
+  "Grey Headphones","Headband","Nasal Strip","None","Pencil","Red Headphones",
+  "Silver Chain","Space Visor","Steampunk Goggles"
+];
+
 const ACCESSORIES = {
   "3D Glasses":        { DunksLayups:8, MidRange:8, ThreePT:8, DefIQ:8, Rebounding:9 },
   "Armband":           { DunksLayups:1, FreeThrows:1, MidRange:1, ThreePT:2 },
@@ -768,104 +820,90 @@ const SPECIALS = {
   "Tongue Out":  { Inside:3, DunksLayups:4, FreeThrows:3, MidRange:3, ThreePT:3, OffIQ:3, DefIQ:3, Dribbling:3, Passing:3, Rebounding:2, Height:3, Strength:3, Speed:3, Jumping:4 },
 };
 
-// ── Mapping: NFT raw stats → 4 game skills ──
-// Dunking:    Inside, DunksLayups, Jumping (physical)
-// Shooting:   MidRange, ThreePT, FreeThrows
-// Playmaking: OffIQ, Dribbling, Passing, Speed (physical)
-// Defense:    DefIQ, Rebounding, Height (physical)
-
-function rawToGameStats(base, bodyKey, accKey, specialKey) {
-  const bt = BODY_TYPES[bodyKey]  || {};
-  const ac = ACCESSORIES[accKey]  || {};
-  const sp = SPECIALS[specialKey] || {};
-
-  // Sum raw NFT accessory + special stats
-  const raw = {};
-  const accKeys = ['Inside','DunksLayups','FreeThrows','MidRange','ThreePT','OffIQ','DefIQ','Dribbling','Passing','Rebounding'];
-  accKeys.forEach(k => { raw[k] = (ac[k]||0) + (sp[k]||0); });
-
-  // Physical modifiers
-  const phys = {
-    Height:   (bt.Height||0)   + (sp.Height||0),
-    Strength: (bt.Strength||0) + (sp.Strength||0),
-    Speed:    (bt.Speed||0)    + (sp.Speed||0),
-    Jumping:  (bt.Jumping||0)  + (sp.Jumping||0),
-  };
-
-  // Scale raw accessory bonuses to game stat points (divide by 3, round)
-  const accDunking    = Math.round((raw.Inside + raw.DunksLayups) / 3);
-  const accShooting   = Math.round((raw.MidRange + raw.ThreePT + raw.FreeThrows) / 3);
-  const accPlaymaking = Math.round((raw.OffIQ + raw.Dribbling + raw.Passing) / 3);
-  const accDefense    = Math.round((raw.DefIQ + raw.Rebounding) / 3);
-
-  // Physical → game skill bonus (divide by 4)
-  const physDunking    = Math.round((phys.Jumping) / 2);
-  const physShooting   = 0;
-  const physPlaymaking = Math.round((phys.Speed) / 2);
-  const physDefense    = Math.round((phys.Height) / 2);
-
-  return {
-    dunking:    Math.min(99, base.dunking    + accDunking    + physDunking),
-    shooting:   Math.min(99, base.shooting   + accShooting   + physShooting),
-    playmaking: Math.min(99, base.playmaking + accPlaymaking + physPlaymaking),
-    defense:    Math.min(99, base.defense    + accDefense    + physDefense),
-  };
-}
-
-// ══════════════════════════════════════════════════════
-//  SHOT TABLE
-// ══════════════════════════════════════════════════════
-
-const SHOTS = {
-  2:  { label:'Slam Dunk',    icon:'🔥', pts:2, skill:'dunking',  color:'var(--purple)' },
-  3:  { label:'Layup',        icon:'🏃', pts:1, skill:'dunking',  color:'var(--blue2)'  },
-  4:  { label:'Layup',        icon:'🏃', pts:1, skill:'dunking',  color:'var(--blue2)'  },
-  5:  { label:'Mid Range',    icon:'🎯', pts:2, skill:'shooting', color:'var(--orange)' },
-  6:  { label:'Mid Range',    icon:'🎯', pts:2, skill:'shooting', color:'var(--orange)' },
-  7:  { label:'Mid Range',    icon:'🎯', pts:2, skill:'shooting', color:'var(--orange)' },
-  8:  { label:'Deep Two',     icon:'💪', pts:2, skill:'shooting', color:'var(--cyan)'   },
-  9:  { label:'Deep Two',     icon:'💪', pts:2, skill:'shooting', color:'var(--cyan)'   },
-  10: { label:'Three Pointer',icon:'🏹', pts:3, skill:'shooting', color:'var(--green)'  },
-  11: { label:'Three Pointer',icon:'🏹', pts:3, skill:'shooting', color:'var(--green)'  },
-  12: { label:'Logo Shot',    icon:'⚡', pts:4, skill:'shooting', color:'var(--yellow)' },
+// Shot make thresholds (d6 + skill must meet or beat)
+const SHOT_THRESHOLDS = {
+  'Slam Dunk':     { skill:'dunking',  threshold:78 },
+  'Layup':         { skill:'dunking',  threshold:74 },
+  'Deep Two':      { skill:'shooting', threshold:77 },
+  'Three Pointer': { skill:'shooting', threshold:81 },
+  'Logo Shot':     { skill:'shooting', threshold:87 },
 };
 
-const DICE_FACES = ['⚀','⚁','⚂','⚃','⚄','⚅'];
-const P_COLORS   = ['var(--orange)','var(--blue2)'];
-
 // ══════════════════════════════════════════════════════
-//  STATE
+//  ACCESSORY FILTERING
 // ══════════════════════════════════════════════════════
 
-let players     = [];
-let possession  = 0;
-let pendingShot = null;
-let lastSetup   = null;
-let avatarData  = { av1: null, av2: null };
+function buildAccOptions(exclude = []) {
+  return ['<option value="">— None —</option>',
+    ...ALL_ACCESSORIES
+      .filter(a => !exclude.includes(a))
+      .map(a => `<option value="${a}">${a}</option>`)
+  ].join('');
+}
 
-// ══════════════════════════════════════════════════════
-//  AVATAR UPLOAD
-// ══════════════════════════════════════════════════════
+function filterAccessories(p) {
+  const v1 = document.getElementById(`p${p}-acc1`).value;
+  const v2 = document.getElementById(`p${p}-acc2`).value;
 
-function loadAvatar(e, key) {
-  const file = e.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = function(ev) {
-    avatarData[key] = ev.target.result;
-    const img  = document.getElementById(key + '-img');
-    const hint = document.getElementById(key + '-hint');
-    img.src = ev.target.result;
-    img.style.display = 'block';
-    hint.style.display = 'none';
-  };
-  reader.readAsDataURL(file);
-  e.stopPropagation();
+  const sel2 = document.getElementById(`p${p}-acc2`);
+  const sel3 = document.getElementById(`p${p}-acc3`);
+
+  const cur2 = sel2.value;
+  const cur3 = sel3.value;
+
+  sel2.innerHTML = buildAccOptions(v1 ? [v1] : []);
+  sel2.value = cur2 && cur2 !== v1 ? cur2 : '';
+
+  const ex3 = [v1, sel2.value].filter(Boolean);
+  sel3.innerHTML = buildAccOptions(ex3);
+  sel3.value = cur3 && !ex3.includes(cur3) ? cur3 : '';
+}
+
+function initAccessories() {
+  [1, 2].forEach(p => {
+    document.getElementById(`p${p}-acc1`).innerHTML = buildAccOptions();
+    document.getElementById(`p${p}-acc2`).innerHTML = buildAccOptions();
+    document.getElementById(`p${p}-acc3`).innerHTML = buildAccOptions();
+  });
 }
 
 // ══════════════════════════════════════════════════════
-//  LIVE STAT PREVIEW
+//  STAT CALCULATION
 // ══════════════════════════════════════════════════════
+
+function rawToGameStats(base, bodyKey, accKeys, specialKey) {
+  const bt = BODY_TYPES[bodyKey]  || {};
+  const sp = SPECIALS[specialKey] || {};
+
+  const raw = { Inside:0, DunksLayups:0, FreeThrows:0, MidRange:0, ThreePT:0, OffIQ:0, DefIQ:0, Dribbling:0, Passing:0, Rebounding:0 };
+
+  accKeys.forEach(k => {
+    const ac = ACCESSORIES[k] || {};
+    Object.keys(raw).forEach(s => { raw[s] += (ac[s] || 0); });
+  });
+  Object.keys(raw).forEach(s => { raw[s] += (sp[s] || 0); });
+
+  const phys = {
+    Height:   (bt.Height||0)   + (sp.Height||0),
+    Jumping:  (bt.Jumping||0)  + (sp.Jumping||0),
+    Speed:    (bt.Speed||0)    + (sp.Speed||0),
+  };
+
+  return {
+    dunking:    Math.min(99, base.dunking    + Math.round((raw.Inside + raw.DunksLayups) / 3) + Math.round(phys.Jumping / 2)),
+    shooting:   Math.min(99, base.shooting   + Math.round((raw.MidRange + raw.ThreePT + raw.FreeThrows) / 3)),
+    playmaking: Math.min(99, base.playmaking + Math.round((raw.OffIQ + raw.Dribbling + raw.Passing) / 3) + Math.round(phys.Speed / 2)),
+    defense:    Math.min(99, base.defense    + Math.round((raw.DefIQ + raw.Rebounding) / 3) + Math.round(phys.Height / 2)),
+  };
+}
+
+function getAccKeys(p) {
+  return [
+    document.getElementById(`p${p}-acc1`).value,
+    document.getElementById(`p${p}-acc2`).value,
+    document.getElementById(`p${p}-acc3`).value,
+  ].filter(Boolean);
+}
 
 function updatePreview(n) {
   const base = {
@@ -874,37 +912,42 @@ function updatePreview(n) {
     playmaking: parseInt(document.getElementById(`p${n}-playmaking`).value) || 75,
     defense:    parseInt(document.getElementById(`p${n}-defense`).value)    || 75,
   };
-  const body    = document.getElementById(`p${n}-body`).value;
-  const acc     = document.getElementById(`p${n}-acc`).value;
-  const special = document.getElementById(`p${n}-special`).value;
-
-  const final = rawToGameStats(base, body, acc, special);
+  const final = rawToGameStats(
+    base,
+    document.getElementById(`p${n}-body`).value,
+    getAccKeys(n),
+    document.getElementById(`p${n}-special`).value
+  );
 
   const bars = [
-    { label:'🏀 Dunking',    val: final.dunking,    color:'var(--purple)', cls:'dunk'  },
-    { label:'🎯 Shooting',   val: final.shooting,   color:'var(--green)',  cls:'shoot' },
-    { label:'🎮 Playmaking', val: final.playmaking, color:'var(--cyan)',   cls:'play'  },
-    { label:'🛡 Defense',    val: final.defense,    color:'var(--red)',    cls:'def'   },
+    { label:'🏀 Dunking',    val:final.dunking,    color:'var(--purple)' },
+    { label:'🎯 Shooting',   val:final.shooting,   color:'var(--green)'  },
+    { label:'🎮 Playmaking', val:final.playmaking, color:'var(--cyan)'   },
+    { label:'🛡 Defense',    val:final.defense,    color:'var(--red)'    },
   ];
 
-  const container = document.getElementById(`p${n}-bars`);
-  container.innerHTML = bars.map(b => `
+  document.getElementById(`p${n}-bars`).innerHTML = bars.map(b => `
     <div class="stat-bar-row">
       <div class="stat-bar-label">${b.label}</div>
-      <div class="stat-bar-track">
-        <div class="stat-bar-fill" style="width:${b.val}%;background:${b.color};"></div>
-      </div>
+      <div class="stat-bar-track"><div class="stat-bar-fill" style="width:${b.val}%;background:${b.color};"></div></div>
       <div class="stat-bar-val" style="color:${b.color};">${b.val}</div>
     </div>
   `).join('');
 }
 
-// Init previews on load
-window.addEventListener('load', () => { updatePreview(1); updatePreview(2); });
-
 // ══════════════════════════════════════════════════════
 //  HELPERS
 // ══════════════════════════════════════════════════════
+
+const DICE_FACES = ['⚀','⚁','⚂','⚃','⚄','⚅'];
+const P_COLORS   = ['var(--orange)','var(--blue2)'];
+
+let players     = [];
+let possession  = 0;
+let pendingShot = null;
+let lastSetup   = null;
+let avatarData  = { 1: null, 2: null };
+let offRebStreak = [0, 0]; // consecutive offensive rebounds per player
 
 function d6()   { return Math.floor(Math.random() * 6) + 1; }
 function d6x2() { return [d6(), d6()]; }
@@ -912,7 +955,7 @@ function d6x2() { return [d6(), d6()]; }
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  window.scrollTo(0,0);
+  window.scrollTo(0, 0);
 }
 
 function setCourtLabel(t) { document.getElementById('court-label').textContent = t; }
@@ -924,17 +967,17 @@ function setActions(buttons) {
   row.innerHTML = '';
   buttons.forEach(b => {
     const btn = document.createElement('button');
-    btn.className   = 'btn ' + (b.cls || 'btn-primary');
+    btn.className = 'btn ' + (b.cls || 'btn-primary');
     btn.textContent = b.label;
-    btn.onclick     = b.fn;
+    btn.onclick = b.fn;
     row.appendChild(btn);
   });
 }
 
 function log(msg, cls='') {
   const wrap = document.getElementById('log-wrap');
-  const el   = document.createElement('div');
-  el.className   = 'log-line ' + cls;
+  const el = document.createElement('div');
+  el.className = 'log-line ' + cls;
   el.textContent = msg;
   wrap.appendChild(el);
   wrap.scrollTop = wrap.scrollHeight;
@@ -948,9 +991,19 @@ function updateScoreboard() {
   });
 }
 
-function avatarHTML(dataUrl, fallback) {
-  if (dataUrl) return `<img src="${dataUrl}" style="width:100%;height:100%;object-fit:cover;border-radius:10px;"/>`;
-  return fallback;
+function loadAvatar(e, n) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    avatarData[n] = ev.target.result;
+    const img  = document.getElementById(`av${n}-img`);
+    const hint = document.getElementById(`av${n}-hint`);
+    img.src = ev.target.result;
+    img.style.display = 'block';
+    hint.style.display = 'none';
+  };
+  reader.readAsDataURL(file);
 }
 
 // ══════════════════════════════════════════════════════
@@ -960,44 +1013,33 @@ function avatarHTML(dataUrl, fallback) {
 function startGame() {
   players   = [];
   lastSetup = [];
+  offRebStreak = [0, 0];
 
   for (let i = 1; i <= 2; i++) {
-    const name      = document.getElementById(`p${i}-name`).value.trim() || `Player ${i}`;
-    const body      = document.getElementById(`p${i}-body`).value;
-    const acc       = document.getElementById(`p${i}-acc`).value;
-    const special   = document.getElementById(`p${i}-special`).value;
+    const name    = document.getElementById(`p${i}-name`).value.trim() || `Player ${i}`;
+    const body    = document.getElementById(`p${i}-body`).value;
+    const accKeys = getAccKeys(i);
+    const special = document.getElementById(`p${i}-special`).value;
     const base = {
       dunking:    parseInt(document.getElementById(`p${i}-dunking`).value)    || 75,
       shooting:   parseInt(document.getElementById(`p${i}-shooting`).value)   || 75,
       playmaking: parseInt(document.getElementById(`p${i}-playmaking`).value) || 75,
       defense:    parseInt(document.getElementById(`p${i}-defense`).value)    || 75,
     };
-    const final = rawToGameStats(base, body, acc, special);
+    const final = rawToGameStats(base, body, accKeys, special);
 
-    const p = {
-      id: i-1, name, body, acc, special, score: 0,
-      dunking:    final.dunking,
-      shooting:   final.shooting,
-      playmaking: final.playmaking,
-      defense:    final.defense,
-      avatar:     avatarData[`av${i}`],
-    };
+    const p = { id:i-1, name, body, accKeys, special, score:0, avatar: avatarData[i], ...final };
     players.push(p);
-    lastSetup.push({ name, body, acc, special, base });
 
-    // Scoreboard
     document.getElementById(`g-p${i}-name`).textContent = name;
     document.getElementById(`g-p${i}-sub`).textContent  =
-      [body, acc && acc !== '' ? acc : null, special !== 'None' ? '⭐ '+special : null]
-      .filter(Boolean).join(' · ');
+      [body, ...accKeys, special !== 'None' ? '⭐ '+special : ''].filter(Boolean).join(' · ');
 
-    // Avatar
     const avEl = document.getElementById(`g-av${i}`);
     avEl.innerHTML = p.avatar
       ? `<img src="${p.avatar}" style="width:100%;height:100%;object-fit:cover;"/>`
       : '🏀';
 
-    // Pills
     document.getElementById(`g-p${i}-pills`).innerHTML = [
       { l:`🏀 ${p.dunking}`,    c:'dunk'  },
       { l:`🎯 ${p.shooting}`,   c:'shoot' },
@@ -1024,7 +1066,7 @@ function doJumpBall() {
     <div style="text-align:center;">
       <div style="font-size:3rem;margin-bottom:8px;">🏀</div>
       <div style="font-size:.84rem;color:var(--dim);">
-        Highest <strong style="color:var(--white);">Dunking</strong> wins the tip.<br/>Ties decided by d6 roll-off.
+        Highest <strong style="color:var(--white);">Dunking</strong> wins the tip.<br/>Ties settled by d6 roll-off.
       </div>
     </div>
   `);
@@ -1040,7 +1082,7 @@ function resolveJumpBall() {
   } else {
     const r0 = d6(), r1 = d6();
     winner = r0 >= r1 ? 0 : 1;
-    log(`🏀 Tip tied! Roll-off: ${p0.name}(${r0}) vs ${p1.name}(${r1}) → ${players[winner].name}!`, 'info');
+    log(`🏀 Tie! Roll-off: ${p0.name}(${r0}) vs ${p1.name}(${r1}) → ${players[winner].name}!`, 'info');
   }
   possession = winner;
   updateScoreboard();
@@ -1057,7 +1099,7 @@ function startPossession() {
   setCourtLabel('OFFENSE');
   setPhaseTitle(`${off.name} has the ball`);
   setCourtBody(`
-    <div style="text-align:center;color:var(--dim);font-size:.84rem;margin-bottom:8px;">Roll 2d6 to determine the shot type</div>
+    <div style="text-align:center;color:var(--dim);font-size:.84rem;margin-bottom:8px;">Roll 2d6 to determine shot type</div>
     <div class="dice-row">
       <div class="die" id="die1">⚀</div>
       <div class="die" id="die2">⚀</div>
@@ -1070,19 +1112,35 @@ function startPossession() {
 function rollForShot() {
   const dice  = d6x2();
   const total = dice[0] + dice[1];
-  const shot  = SHOTS[total];
+  const isDoubles = dice[0] === dice[1];
+  const isLogo    = dice[0] === 6 && dice[1] === 6;
 
+  let shot;
+  if (isLogo) {
+    shot = { label:'Logo Shot',    icon:'⚡', pts:4, skill:'shooting', color:'var(--yellow)', type:'logo' };
+  } else if (isDoubles) {
+    shot = { label:'Slam Dunk',    icon:'🔥', pts:2, skill:'dunking',  color:'var(--purple)', type:'dunk' };
+  } else if (total <= 7) {
+    shot = { label:'Layup',        icon:'🏃', pts:1, skill:'dunking',  color:'var(--blue2)',  type:'normal' };
+  } else if (total <= 9) {
+    shot = { label:'Deep Two',     icon:'💪', pts:2, skill:'shooting', color:'var(--cyan)',   type:'normal' };
+  } else {
+    shot = { label:'Three Pointer',icon:'🏹', pts:3, skill:'shooting', color:'var(--green)',  type:'normal' };
+  }
+
+  const dc = isLogo ? 'logo-roll' : isDoubles ? 'dunk-roll' : '';
   ['die1','die2'].forEach((id, i) => {
     const el = document.getElementById(id);
     el.classList.add('roll-anim');
+    if (dc) el.classList.add(dc);
     el.textContent = DICE_FACES[dice[i]-1];
-    setTimeout(() => el.classList.remove('roll-anim'), 380);
+    setTimeout(() => { el.classList.remove('roll-anim'); }, 380);
   });
   const dt = document.getElementById('dice-total');
   dt.style.opacity = '1';
-  dt.textContent   = total;
+  dt.textContent = isDoubles ? (isLogo ? '6+6!' : `${dice[0]}+${dice[1]}`) : total;
 
-  log(`🎲 ${players[possession].name} rolled ${dice[0]}+${dice[1]}=${total} → ${shot.icon} ${shot.label}`, 'event');
+  log(`🎲 ${players[possession].name} rolled ${dice[0]}+${dice[1]}=${total} → ${isDoubles?(isLogo?'⚡ Logo Shot!':'🔥 Slam Dunk!'):shot.icon+' '+shot.label}`, 'event');
   pendingShot = shot;
   setTimeout(() => showShotCard(shot), 440);
 }
@@ -1090,18 +1148,22 @@ function rollForShot() {
 function showShotCard(shot) {
   const off = players[possession];
   const def = players[1 - possession];
-  const val = off[shot.skill];
+  const thresh = SHOT_THRESHOLDS[shot.label];
 
   setCourtLabel('SHOT SELECTION');
   setPhaseTitle('');
   setCourtBody(`
     <div class="shot-card fade" style="border-color:${shot.color};">
+      ${shot.type === 'logo' ? `<div class="doubles-badge logo" style="margin-bottom:8px;">⚡ 6+6 LOGO SHOT!</div>` :
+        shot.type === 'dunk' ? `<div class="doubles-badge dunk" style="margin-bottom:8px;">🔥 DOUBLES — SLAM DUNK!</div>` : ''}
       <div class="shot-icon">${shot.icon}</div>
       <div class="shot-name" style="color:${shot.color};">${shot.label}</div>
       <div class="shot-meta">Worth <strong>${shot.pts} pt${shot.pts>1?'s':''}</strong></div>
-      <div class="shot-skill" style="color:${shot.color};">${off.name}'s ${shot.skill.charAt(0).toUpperCase()+shot.skill.slice(1)} (${val})</div>
+      <div class="shot-skill" style="color:${shot.color};">
+        ${off.name}'s ${shot.skill.charAt(0).toUpperCase()+shot.skill.slice(1)} (${off[shot.skill]}) · needs d6+skill ≥ ${thresh.threshold}
+      </div>
     </div>
-    <div style="font-size:.8rem;color:var(--dim);text-align:center;">
+    <div style="font-size:.78rem;color:var(--dim);text-align:center;">
       🛡 ${def.name} must roll <strong style="color:var(--white);">doubles</strong> to block
     </div>
   `);
@@ -1119,10 +1181,9 @@ function rollDefense() {
   const dice = d6x2();
   const doubles = dice[0] === dice[1];
 
+  const dc = doubles ? 'dunk-roll' : '';
   setCourtLabel('DEFENSE');
   setPhaseTitle(`${def.name} tries to block!`);
-
-  const dc = doubles ? 'doubles' : '';
   setCourtBody(`
     <div style="text-align:center;font-size:.8rem;color:var(--dim);margin-bottom:8px;">Needs doubles to block!</div>
     <div class="dice-row">
@@ -1135,38 +1196,55 @@ function rollDefense() {
     log(`🛡 ${def.name} rolled doubles (${dice[0]}-${dice[1]}) — BLOCKED!`, 'bad');
     setTimeout(() => showBlockResult(dice), 500);
   } else {
-    log(`✅ No doubles (${dice[0]}-${dice[1]}) — ${off.name}'s shot is GOOD!`, 'good');
-    setTimeout(() => shotMade(shot), 500);
+    log(`🏀 No doubles (${dice[0]}-${dice[1]}) — ${off.name} attempts the shot!`, 'info');
+    setTimeout(() => rollShotAttempt(shot), 500);
   }
 }
 
-function shotMade(shot) {
-  const off = players[possession];
-  off.score += shot.pts;
-  updateScoreboard();
-  log(`${shot.icon} ${off.name} scores +${shot.pts}! — ${players[0].name} ${players[0].score}–${players[1].score} ${players[1].name}`, 'good');
+// ══════════════════════════════════════════════════════
+//  SHOT ATTEMPT (make or miss)
+// ══════════════════════════════════════════════════════
 
-  if (off.score >= 21) { setTimeout(() => endGame(possession), 700); return; }
+function rollShotAttempt(shot) {
+  const off    = players[possession];
+  const thresh = SHOT_THRESHOLDS[shot.label];
+  const die    = d6();
+  const total  = die + off[thresh.skill];
+  const made   = total >= thresh.threshold;
 
-  setCourtLabel('SCORED!');
+  log(`${shot.icon} ${off.name} shoots: d6(${die}) + ${thresh.skill}(${off[thresh.skill]}) = ${total} vs ${thresh.threshold} — ${made ? '✅ MADE' : '❌ MISSED'}`, made ? 'good' : 'bad');
+
+  setCourtLabel('SHOT ATTEMPT');
   setPhaseTitle('');
   setCourtBody(`
-    <div class="shot-card fade" style="border-color:${shot.color};">
+    <div class="shot-card fade" style="border-color:${made ? 'var(--green)' : 'var(--red)'};">
       <div class="shot-icon">${shot.icon}</div>
-      <div class="shot-name" style="color:${shot.color};">${shot.label} — MONEY! 💰</div>
-      <div class="shot-meta" style="margin-top:8px;">
-        <strong style="color:${shot.color};font-size:1.5rem;">+${shot.pts}</strong> pt${shot.pts>1?'s':''}
+      <div class="shot-name" style="color:${shot.color};">${shot.label}</div>
+      <div style="margin-top:12px;">
+        <div style="font-size:2rem;font-weight:900;color:${made?'var(--green)':'var(--red)'};">${total}</div>
+        <div style="font-size:.75rem;color:var(--dim);">d6(${die}) + ${thresh.skill}(${off[thresh.skill]}) vs ${thresh.threshold}</div>
       </div>
     </div>
-    <div class="outcome made pop">BUCKET! 🏀</div>
+    <div class="outcome ${made?'made':'missed'} pop">${made ? `BUCKET! +${shot.pts} 🏀` : 'MISSED! 😤'}</div>
   `);
-  possession = 1 - possession;
-  updateScoreboard();
-  setActions([{ label:'▶ Next Possession', cls:'btn-primary', fn: startPossession }]);
+
+  if (made) {
+    off.score += shot.pts;
+    offRebStreak[possession] = 0;
+    offRebStreak[1 - possession] = 0;
+    updateScoreboard();
+    log(`✅ ${off.name} scores +${shot.pts}! — ${players[0].name} ${players[0].score}–${players[1].score} ${players[1].name}`, 'good');
+    if (off.score >= 21) { setTimeout(() => endGame(possession), 700); return; }
+    possession = 1 - possession;
+    updateScoreboard();
+    setActions([{ label:'▶ Next Possession', cls:'btn-primary', fn: startPossession }]);
+  } else {
+    setActions([{ label:'🔄 Rebound Battle', cls:'btn-primary', fn: rollRebound }]);
+  }
 }
 
 // ══════════════════════════════════════════════════════
-//  REBOUND
+//  BLOCK → REBOUND
 // ══════════════════════════════════════════════════════
 
 function showBlockResult(blockDice) {
@@ -1174,10 +1252,10 @@ function showBlockResult(blockDice) {
   setPhaseTitle('');
   setCourtBody(`
     <div style="text-align:center;" class="fade">
-      <div class="doubles-badge">🚫 DOUBLES ${blockDice[0]}-${blockDice[1]} — BLOCKED!</div>
+      <div class="doubles-badge dunk">🚫 DOUBLES ${blockDice[0]}-${blockDice[1]} — BLOCKED!</div>
       <div style="margin-top:14px;font-size:.82rem;color:var(--dim);">
         Both players fight for the rebound.<br/>
-        Roll d6 + <strong style="color:var(--white);">Defense + Dunking</strong> — higher wins · Ties go to offense.
+        Roll d6 + <strong style="color:var(--white);">Defense + Dunking</strong> — consecutive off-boards penalized.
       </div>
     </div>
   `);
@@ -1187,19 +1265,45 @@ function showBlockResult(blockDice) {
 function rollRebound() {
   const p0 = players[0], p1 = players[1];
   const r0d = d6(), r1d = d6();
-  const r0  = r0d + p0.defense + p0.dunking;
-  const r1  = r1d + p1.defense + p1.dunking;
+
+  // Base rebound scores
+  let r0 = r0d + p0.defense + p0.dunking;
+  let r1 = r1d + p1.defense + p1.dunking;
+
+  // Consecutive offensive rebound penalty — halve score each time
+  const streak0 = offRebStreak[0];
+  const streak1 = offRebStreak[1];
+
+  // Only penalize if they currently have possession (they'd be going for off reb)
+  if (possession === 0 && streak0 > 0) {
+    r0 = Math.floor(r0 / Math.pow(2, streak0));
+    log(`⚠️ ${p0.name} off-reb streak ×${streak0} — score halved to ${r0}`, 'info');
+  }
+  if (possession === 1 && streak1 > 0) {
+    r1 = Math.floor(r1 / Math.pow(2, streak1));
+    log(`⚠️ ${p1.name} off-reb streak ×${streak1} — score halved to ${r1}`, 'info');
+  }
 
   let winner;
   if (r0 !== r1) {
     winner = r0 > r1 ? 0 : 1;
   } else {
-    winner = possession; // tie → offense keeps it
-    log('🔄 Rebound tied — offense keeps possession.', 'info');
+    winner = possession; // tie → offense
+    log('🔄 Rebound tied — offense keeps ball.', 'info');
   }
 
-  log(`🔄 Rebound: ${p0.name} d6(${r0d})+Def(${p0.defense})+Dunk(${p0.dunking})=${r0} vs ${p1.name} d6(${r1d})+Def(${p1.defense})+Dunk(${p1.dunking})=${r1} → ${players[winner].name}!`, 'info');
+  // Track offensive rebound streak
+  if (winner === possession) {
+    offRebStreak[possession]++;
+    offRebStreak[1 - possession] = 0;
+    log(`🔄 ${players[winner].name} grabs offensive rebound! (streak: ${offRebStreak[winner]})`, 'info');
+  } else {
+    offRebStreak[0] = 0;
+    offRebStreak[1] = 0;
+    log(`🔄 ${players[winner].name} grabs the defensive board!`, 'info');
+  }
 
+  log(`🔄 Rebound: ${p0.name}=${r0} vs ${p1.name}=${r1} → ${players[winner].name} wins!`, 'info');
   possession = winner;
   updateScoreboard();
 
@@ -1211,13 +1315,13 @@ function rollRebound() {
       <div class="result-box ${p0w?'win':'lose'}">
         <div class="rb-label">🔄 ${p0.name}</div>
         <div class="rb-val">${r0}</div>
-        <div class="rb-detail">d6(${r0d})+Def(${p0.defense})+Dunk(${p0.dunking})</div>
+        <div class="rb-detail">d6(${r0d})+Def(${p0.defense})+Dunk(${p0.dunking})${streak0&&possession===0?' ÷'+Math.pow(2,streak0):''}</div>
       </div>
       <div class="vs-divider">${p0w?'>':'<'}</div>
       <div class="result-box ${!p0w?'win':'lose'}">
         <div class="rb-label">🔄 ${p1.name}</div>
         <div class="rb-val">${r1}</div>
-        <div class="rb-detail">d6(${r1d})+Def(${p1.defense})+Dunk(${p1.dunking})</div>
+        <div class="rb-detail">d6(${r1d})+Def(${p1.defense})+Dunk(${p1.dunking})${streak1&&possession===1?' ÷'+Math.pow(2,streak1):''}</div>
       </div>
     </div>
     <div class="outcome neutral pop" style="margin-top:4px;">${players[winner].name} grabs the board! 🏀</div>
@@ -1230,27 +1334,17 @@ function rollRebound() {
 // ══════════════════════════════════════════════════════
 
 function endGame(winIdx) {
-  const w = players[winIdx];
-  const l = players[1 - winIdx];
-
+  const w = players[winIdx], l = players[1 - winIdx];
   const avEl = document.getElementById('win-avatar');
   avEl.innerHTML = w.avatar
     ? `<img src="${w.avatar}" style="width:100%;height:100%;object-fit:cover;"/>`
     : '🏀';
-
   document.getElementById('win-name').textContent = `${w.name} Wins!`;
   document.getElementById('win-sub').textContent  =
     [w.body, w.special !== 'None' ? '⭐ '+w.special : null].filter(Boolean).join(' · ');
-
   document.getElementById('final-scores').innerHTML = `
-    <div class="fsbox">
-      <div class="fsname">${w.name}</div>
-      <div class="fsval" style="color:${P_COLORS[winIdx]}">${w.score}</div>
-    </div>
-    <div class="fsbox">
-      <div class="fsname">${l.name}</div>
-      <div class="fsval" style="color:${P_COLORS[1-winIdx]}">${l.score}</div>
-    </div>
+    <div class="fsbox"><div class="fsname">${w.name}</div><div class="fsval" style="color:${P_COLORS[winIdx]}">${w.score}</div></div>
+    <div class="fsbox"><div class="fsname">${l.name}</div><div class="fsval" style="color:${P_COLORS[1-winIdx]}">${l.score}</div></div>
   `;
   showScreen('winscreen');
 }
@@ -1266,12 +1360,20 @@ function confirmNew() {
 function rematch() {
   if (!lastSetup) { showScreen('home'); return; }
   players.forEach(p => p.score = 0);
+  offRebStreak = [0, 0];
   possession = 0;
   document.getElementById('log-wrap').innerHTML = '<h4>📋 Play-by-Play</h4>';
   updateScoreboard();
   showScreen('game');
   doJumpBall();
 }
+
+// Init
+window.addEventListener('load', () => {
+  initAccessories();
+  updatePreview(1);
+  updatePreview(2);
+});
 </script>
 </body>
 </html>
